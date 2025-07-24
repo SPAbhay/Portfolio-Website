@@ -6,7 +6,6 @@
     <title>Abhay Arora | AI Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- GSAP Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     
@@ -25,7 +24,6 @@
     </div>
 
     <div class="portfolio-wrapper">
-        <!-- Fixed Left Sidebar -->
         <aside class="left-sidebar">
             <div class="sidebar-content">
                 <a href="index.html" class="logo-icon">
@@ -48,7 +46,6 @@
             </div>
         </aside>
 
-        <!-- Main Scrollable Content -->
         <main class="main-content">
             <section id="hero">
                 <div class="container">
@@ -195,7 +192,6 @@
             </footer>
         </main>
 
-        <!-- Fixed Right Sidebar -->
         <aside class="right-sidebar">
             <div class="social-links">
                 <a href="#" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
@@ -541,25 +537,34 @@
             const ctx = canvas.getContext('2d');
             
             let width, height, layers, allNodes, connections, pulses;
-            let mouse = { x: undefined, y: undefined, radius: 100 };
+            let mouse = { x: undefined, y: undefined, radius: 150 };
             let animationFrameId;
 
             const skillsData = [
                 {
-                    layer: "Input",
-                    skills: ["Python", "SQL", "Git"]
+                    layer: "Input Layer",
+                    skills: ["Data", "Curiosity", "Projects"],
+                    color: "rgba(255, 193, 7, 1)" // Gold
                 },
                 {
-                    layer: "Hidden 1",
-                    skills: ["PyTorch", "Scikit-Learn", "Pandas", "FastAPI", "Figma"]
+                    layer: "Generative AI & LLMs",
+                    skills: ["LangChain", "LangGraph", "Transformers", "RAG", "Prompting", "FAISS"],
+                    color: "rgba(233, 30, 99, 1)" // Pink
                 },
                 {
-                    layer: "Hidden 2",
-                    skills: ["LangChain", "Transformers", "RAG", "Docker", "AWS"]
+                    layer: "MLOps & Platforms",
+                    skills: ["Databricks", "MLflow", "PySpark", "Docker", "AWS", "FastAPI", "Git"],
+                    color: "rgba(255, 87, 34, 1)" // Deep Orange
                 },
                 {
-                    layer: "Output",
-                    skills: ["Generative AI", "MLOps", "Software", "Product"]
+                    layer: "Core ML & Data Science",
+                    skills: ["PyTorch", "Scikit-Learn", "Pandas", "NumPy", "SQL", "Hugging Face"],
+                    color: "rgba(33, 150, 243, 1)" // Blue
+                },
+                {
+                    layer: "Output Layer",
+                    skills: ["AI/ML Engineer"],
+                    color: "rgba(76, 175, 80, 1)" // Green
                 }
             ];
 
@@ -573,23 +578,26 @@
                 pulses = [];
 
                 const layerCount = skillsData.length;
-                const layerSpacing = width / (layerCount + 1);
+                const hPadding = width * 0.08;
+                const layerSpacing = (width - hPadding * 2) / (layerCount - 1);
+                const titleHeight = 80;
+                const nodeAreaHeight = height - titleHeight;
+
 
                 skillsData.forEach((layerData, i) => {
                     const layerNodes = [];
                     const nodeCount = layerData.skills.length;
-                    const nodeSpacing = height / (nodeCount + 1);
+                    const nodeSpacing = nodeAreaHeight / (nodeCount + 1);
                     
                     layerData.skills.forEach((skill, j) => {
                         const node = {
-                            x: layerSpacing * (i + 1),
-                            y: nodeSpacing * (j + 1),
-                            vx: (Math.random() - 0.5) * 0.2,
-                            vy: (Math.random() - 0.5) * 0.2,
-                            baseRadius: 6,
-                            radius: 6,
+                            x: hPadding + (i * layerSpacing),
+                            y: titleHeight + (nodeSpacing * (j + 1)),
+                            baseRadius: 15, // Keep node size for a good hover target
+                            radius: 15,
                             label: skill,
-                            layerIndex: i
+                            color: layerData.color,
+                            layerTitle: layerData.layer
                         };
                         layerNodes.push(node);
                         allNodes.push(node);
@@ -617,7 +625,6 @@
                 animationFrameId = null;
             }
 
-            // Use Intersection Observer to only run the animation when it's visible
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -629,7 +636,6 @@
             }, { root: document.querySelector('.main-content'), threshold: 0.1 });
 
             observer.observe(canvas);
-
 
             canvas.addEventListener('mousemove', (e) => {
                 const rect = canvas.getBoundingClientRect();
@@ -648,15 +654,14 @@
                     pulses.push({
                         connection: conn,
                         progress: 0,
-                        speed: Math.random() * 0.005 + 0.005
+                        speed: Math.random() * 0.003 + 0.002
                     });
                 }
-            }, 100);
+            }, 150);
 
             function animate() {
                 ctx.clearRect(0, 0, width, height);
                 const isLightTheme = document.body.classList.contains('light-theme');
-                const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
                 const secondaryTextColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-text').trim();
                 const primaryTextColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-text').trim();
 
@@ -671,54 +676,70 @@
                     const pulseY = from.y + (to.y - from.y) * pulse.progress;
                     
                     ctx.beginPath();
-                    ctx.arc(pulseX, pulseY, 2, 0, Math.PI * 2);
-                    ctx.fillStyle = accentColor;
-                    ctx.globalAlpha = (1 - pulse.progress) * 0.8;
+                    ctx.arc(pulseX, pulseY, 3, 0, Math.PI * 2);
+                    const fromColor = from.color.replace(/, 1\)/, `, ${0.8 * (1-pulse.progress)})`);
+                    ctx.fillStyle = fromColor;
                     ctx.fill();
                 });
-                ctx.globalAlpha = 1;
 
                 connections.forEach(conn => {
                     const distFrom = Math.hypot(mouse.x - conn.from.x, mouse.y - conn.from.y);
                     const distTo = Math.hypot(mouse.x - conn.to.x, mouse.y - conn.to.y);
-                    const opacity = (distFrom < mouse.radius || distTo < mouse.radius) ? 0.8 : 0.2;
+                    const isHovered = mouse.x && (distFrom < mouse.radius || distTo < mouse.radius);
+                    const alpha = isHovered ? 0.5 : 0.2;
 
                     ctx.beginPath();
                     ctx.moveTo(conn.from.x, conn.from.y);
                     ctx.lineTo(conn.to.x, conn.to.y);
                     ctx.strokeStyle = secondaryTextColor;
-                    ctx.globalAlpha = opacity;
-                    ctx.lineWidth = 0.5;
+                    ctx.globalAlpha = alpha;
+                    ctx.lineWidth = 1;
                     ctx.stroke();
                 });
                 ctx.globalAlpha = 1;
 
                 allNodes.forEach(node => {
-                    node.radius = node.baseRadius + Math.sin(Date.now() / 400 + node.x) * 1.5;
-
-                    const dist = Math.hypot(mouse.x - node.x, mouse.y - node.y);
+                    const dist = mouse.x ? Math.hypot(mouse.x - node.x, mouse.y - node.y) : mouse.radius + 1;
                     const influence = Math.max(0, 1 - dist / mouse.radius);
+                    
+                    node.radius = node.baseRadius + influence * 5;
 
-                    ctx.beginPath();
-                    ctx.arc(node.x, node.y, node.radius + influence * 3, 0, Math.PI * 2);
-                    ctx.fillStyle = accentColor;
-                    ctx.globalAlpha = influence;
-                    ctx.fill();
-                    ctx.globalAlpha = 1;
+                    if (influence > 0) {
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, node.radius + 10, 0, Math.PI * 2);
+                        const glowColor = node.color.replace(/, 1\)/, `, ${influence * 0.3})`);
+                        ctx.fillStyle = glowColor;
+                        ctx.fill();
+                    }
 
+                    // FOCUS CHANGE: De-emphasize the node to highlight the text
                     ctx.beginPath();
                     ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = isLightTheme ? '#FFFFFF' : '#161B22';
-                    ctx.fill();
-                    ctx.strokeStyle = primaryTextColor;
-                    ctx.lineWidth = 1;
+                    // Make the fill more transparent
+                    const nodeFillColor = isLightTheme ? 'rgba(255,255,255,0.4)' : 'rgba(22,27,34,0.4)';
+                    ctx.fillStyle = nodeFillColor;
+                    ctx.fill(); 
+                    // Make the border thinner
+                    ctx.strokeStyle = node.color;
+                    ctx.lineWidth = 2; // Thinner border
                     ctx.stroke();
 
-                    ctx.fillStyle = primaryTextColor;
-                    ctx.font = '12px "Space Grotesk"';
+                    // FOCUS CHANGE: Make the text the primary, colored element
+                    ctx.fillStyle = node.color; // Color the text!
+                    ctx.font = 'bold 16px "Space Grotesk"'; // Make text larger
                     ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(node.label, node.x, node.y);
+                    ctx.textBaseline = 'top';
+                    ctx.fillText(node.label, node.x, node.y + node.radius + 12); // Adjust position
+                });
+
+                skillsData.forEach((layerData, i) => {
+                    const hPadding = width * 0.08;
+                    const layerSpacing = (width - hPadding * 2) / (skillsData.length - 1);
+                    const xPos = hPadding + i * layerSpacing;
+                    ctx.fillStyle = primaryTextColor;
+                    ctx.font = 'bold 16px "Space Grotesk"';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`[ ${layerData.layer} ]`, xPos, 40);
                 });
 
                 animationFrameId = requestAnimationFrame(animate);
@@ -727,6 +748,7 @@
             window.addEventListener('resize', resize);
             resize();
         }
+
 
         // --- Run Everything on Page Load ---
         document.addEventListener('DOMContentLoaded', () => {
