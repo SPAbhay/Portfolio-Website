@@ -47,10 +47,32 @@
         </aside>
 
         <main class="main-content">
+
             <section id="hero">
-                <div class="container">
-                    <h1>Abhay Arora</h1>
-                    <p class="headline">Closing the gap between <code>import</code> and <span class="accent-text">impact.</span></p>
+                <div class="hero-content-wrapper">
+                    <div class="hero-main-heading">
+                        <div class="heading-line">Hello.</div>
+                        <div class="heading-line">I'm <span class="accent-text">Abhay.</span></div>
+                    </div>
+                    <p class="hero-tagline">Tech-Agnostic AI Engineer—fluent in any stack.</p>
+                </div>
+
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <span>BUILDING FOR IMPACT <span class="separator">*</span></span>
+                        <span>FROM ZERO TO ONE <span class="separator">*</span></span>
+                        <span>DRIVEN BY CURIOSITY <span class="separator">*</span></span>
+                        <span>AI-NATIVE PRODUCTS <span class="separator">*</span></span>
+                        <span class="highlight-text">DIGITAL PICASSO <span class="separator">*</span></span>
+                        <span>STILL FIGURING IT OUT <span class="separator">*</span></span>
+                        
+                        <span>BUILDING FOR IMPACT <span class="separator">*</span></span>
+                        <span>FROM ZERO TO ONE <span class="separator">*</span></span>
+                        <span>DRIVEN BY CURIOSITY <span class="separator">*</span></span>
+                        <span>AI-NATIVE PRODUCTS <span class="separator">*</span></span>
+                        <span class="highlight-text">DIGITAL PICASSO <span class="separator">*</span></span>
+                        <span>STILL FIGURING IT OUT <span class="separator">*</span></span>
+                    </div>
                 </div>
             </section>
 
@@ -115,7 +137,7 @@
                             <div class="experience-item">
                                 <div class="experience-details">
                                     <h3>Data Scientist 1</h3>
-                                    <p class="company-date">Epsilon &bull; July 2023 - Present</p>
+                                    <p class="company-date">Epsilon &bull; August 2023 - Present</p>
                                     <p class="description">[Placeholder for a key accomplishment.]</p>
                                 </div>
                                 <div class="company-logo">
@@ -179,9 +201,9 @@
 
             <section id="contact">
                 <div class="container">
-                    <h2><span class="title-text">Get in Touch</span></h2>
-                    <p>I'm seeking new opportunities to tackle challenging problems in AI. If you're building something exciting, I'd love to connect.</p>
-                    <a href="#" class="btn">View Resume</a>
+                    <p class="contact-prompt">Have a project in mind?</p>
+                    <h2 class="contact-heading">Let's <span class="accent-text">Create.</span></h2>
+                    <a href="#" class="btn">Get in Touch</a>
                 </div>
             </section>
         
@@ -217,7 +239,7 @@
             }
 
             // --- Active Nav Link on Scroll ---
-            const sections = document.querySelectorAll('section');
+            const sections = document.querySelectorAll('main > section');
             const navLinks = document.querySelectorAll('.sidebar-nav a');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -234,7 +256,7 @@
                         });
                     }
                 });
-            }, { root: mainContent, rootMargin: "-50% 0px -50% 0px" });
+            }, { root: mainContent, rootMargin: "-40% 0px -60% 0px" });
             sections.forEach(section => observer.observe(section));
 
             // --- Sticky Horizontal Scroll & Parallax ---
@@ -257,14 +279,19 @@
                 if (dots.length > 0) dots[0].classList.add('active');
 
                 mainContent.addEventListener('scroll', () => {
-                    const stickyTop = stickyContainer.offsetTop;
+                    if (workSection.getBoundingClientRect().top > mainContent.clientHeight) return;
+
+                    const stickyTop = stickyContainer.offsetTop + workSection.offsetTop;
                     const stickyHeight = stickyContainer.offsetHeight;
                     const scrollTop = mainContent.scrollTop;
-
+                    
                     if (scrollTop >= stickyTop && scrollTop <= stickyTop + stickyHeight - mainContent.clientHeight) {
                         const scrollProgress = (scrollTop - stickyTop) / (stickyHeight - mainContent.clientHeight);
                         const trackWidth = horizontalTrack.scrollWidth;
-                        const contentWidth = window.innerWidth - 200; 
+                        let contentWidth = window.innerWidth;
+                        if(window.innerWidth > 1200) {
+                            contentWidth -= 200;
+                        }
                         const translateX = -scrollProgress * (trackWidth - contentWidth);
                         horizontalTrack.style.transform = `translateX(${translateX}px)`;
                         
@@ -309,15 +336,13 @@
             // --- Custom Cursor ---
             const cursorDot = document.querySelector('.cursor-dot');
             const cursorOutline = document.querySelector('.cursor-outline');
-            const interactiveElements = document.querySelectorAll('a, button, .project-card-large');
+            const interactiveElements = document.querySelectorAll('a, button, .project-card-large, .blog-card-small');
 
             window.addEventListener('mousemove', (e) => {
                 const posX = e.clientX;
                 const posY = e.clientY;
-
                 cursorDot.style.left = `${posX}px`;
                 cursorDot.style.top = `${posY}px`;
-
                 cursorOutline.animate({
                     left: `${posX}px`,
                     top: `${posY}px`
@@ -334,32 +359,52 @@
          * This function initializes all the animation features of the page.
          */
         function startAnimations() {
-            // Register the GSAP plugin
             gsap.registerPlugin(ScrollTrigger);
+            
+            const heroInteractiveContent = document.querySelector('.hero-content-wrapper');
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: '#hero',
+                    scroller: '.main-content',
+                    start: 'top top',
+                    end: 'bottom center',
+                    scrub: 0.5,
+                }
+            })
+            .to(heroInteractiveContent, {
+                opacity: 0,
+                scale: 0.95,
+                ease: 'power1.in'
+            });
 
-            // --- 1. Hero Text Entry Animation ---
-            const heroH1 = document.querySelector('#hero h1');
-            const heroP = document.querySelector('#hero .headline');
-            
-            gsap.set([heroH1, heroP], { autoAlpha: 0, y: 30 });
-            
+            const headingLines = document.querySelectorAll('.heading-line');
+            const tagline = document.querySelector('.hero-tagline');
+            gsap.set(headingLines, { autoAlpha: 0, y: 50 });
+            gsap.set(tagline, { autoAlpha: 0, y: 20 });
             const tl = gsap.timeline({ delay: 0.2 });
             tl
-                .to(heroH1, { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" })
-                .to(heroP, { autoAlpha: 1, y: 0, duration: 0.8, ease: "power3.out" }, "-=0.6");
+                .to(headingLines, { 
+                    autoAlpha: 1, 
+                    y: 0, 
+                    duration: 1, 
+                    ease: "power3.out",
+                    stagger: 0.15 
+                })
+                .to(tagline, {
+                    autoAlpha: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power3.out"
+                }, "-=0.8");
 
-            // --- 2. "Living" Hero 3D Tilt Effect ---
             const heroSection = document.getElementById('hero');
-            const heroElementsToTilt = [heroH1, heroP];
-
+            const heroElementsToTilt = [document.querySelector('.hero-content-wrapper')];
             heroSection.addEventListener('mousemove', (e) => {
                 const { clientWidth, clientHeight } = heroSection;
                 const x = e.clientX - clientWidth / 2;
                 const y = e.clientY - clientHeight / 2;
-
-                const rotateY = (x / (clientWidth / 2)) * 10;
-                const rotateX = -(y / (clientHeight / 2)) * 10;
-
+                const rotateY = (x / (clientWidth / 2)) * 6;
+                const rotateX = -(y / (clientHeight / 2)) * 6;
                 gsap.to(heroElementsToTilt, {
                     rotateX: rotateX,
                     rotateY: rotateY,
@@ -367,7 +412,6 @@
                     ease: "power2.out"
                 });
             });
-
             heroSection.addEventListener('mouseleave', () => {
                 gsap.to(heroElementsToTilt, {
                     rotateX: 0,
@@ -377,40 +421,25 @@
                 });
             });
 
-            // --- 3. "Drawing" Section Reveal ---
             const sectionHeadings = document.querySelectorAll('h2');
-
             sectionHeadings.forEach(heading => {
                 const text = heading.querySelector('.title-text');
-                if (!text) return;
-
-                const accentLine = heading; 
-
-                gsap.set(text, { yPercent: 100 });
-
-                const tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: heading,
-                        scroller: ".main-content",
-                        start: "top 90%",
-                        toggleActions: "play none none none"
-                    }
-                });
-
-                tl.to(accentLine, {
-                    '--before-width': '50px',
-                    duration: 0.7,
-                    ease: 'power3.out'
-                }).to(text, {
-                    yPercent: 0,
-                    duration: 0.7,
-                    ease: 'power3.out'
-                }, "-=0.5");
+                if (text) {
+                     gsap.set(text, { yPercent: 100 });
+                     const tl = gsap.timeline({
+                         scrollTrigger: {
+                             trigger: heading,
+                             scroller: ".main-content",
+                             start: "top 90%",
+                             toggleActions: "play none none none"
+                         }
+                     });
+                     tl.to(heading, { '--before-width': '50px', duration: 0.7, ease: 'power3.out' })
+                       .to(text, { yPercent: 0, duration: 0.7, ease: 'power3.out' }, "-=0.5");
+                }
             });
 
-            // --- 4. Playful Social Icons ---
             const socialLinks = document.querySelectorAll('.right-sidebar .social-links a');
-
             socialLinks.forEach(link => {
                 const icon = link.querySelector('svg');
                 link.addEventListener('mousemove', (e) => {
@@ -419,54 +448,30 @@
                     const centerY = top + height / 2;
                     const deltaX = e.clientX - centerX;
                     const deltaY = e.clientY - centerY;
-
                     const moveX = -deltaX * 0.5;
                     const moveY = -deltaY * 0.5;
-
-                    gsap.to(icon, {
-                        x: moveX,
-                        y: moveY,
-                        duration: 0.6,
-                        ease: "power3.out"
-                    });
+                    gsap.to(icon, { x: moveX, y: moveY, duration: 0.6, ease: "power3.out" });
                 });
-
                 link.addEventListener('mouseleave', () => {
-                    gsap.to(icon, {
-                        x: 0,
-                        y: 0,
-                        duration: 0.8,
-                        ease: "elastic.out(1, 0.5)"
-                    });
+                    gsap.to(icon, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" });
                 });
             });
         }
 
-        /**
-         * This function initializes and runs the generative background canvas.
-         */
         function initGenerativeBackground() {
+            // This function remains the same as your provided version
             const canvas = document.getElementById('generative-background');
             if (!canvas) return;
             const ctx = canvas.getContext('2d');
-
             let width, height, dots;
-
-            const mouse = {
-                x: null,
-                y: null,
-                radius: 150
-            };
-
+            const mouse = { x: null, y: null, radius: 150 };
             function resize() {
                 width = canvas.width = window.innerWidth;
                 height = canvas.height = window.innerHeight;
-                
                 dots = [];
                 const dotSpacing = 40;
                 const columns = Math.floor(width / dotSpacing);
                 const rows = Math.floor(height / dotSpacing);
-
                 for (let x = 0; x < columns; x++) {
                     for (let y = 0; y < rows; y++) {
                         dots.push({
@@ -479,51 +484,30 @@
                     }
                 }
             }
-
             window.addEventListener('resize', resize);
-            window.addEventListener('mousemove', (e) => {
-                mouse.x = e.clientX;
-                mouse.y = e.clientY;
-            });
-
+            window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
             function animate() {
                 ctx.clearRect(0, 0, width, height);
                 const dotColor = document.body.classList.contains('light-theme') ? 'rgba(36, 41, 47, 0.2)' : 'rgba(201, 209, 217, 0.2)';
                 ctx.fillStyle = dotColor;
-
                 dots.forEach(dot => {
-                    let dx = mouse.x - dot.x;
-                    let dy = mouse.y - dot.y;
+                    let dx = mouse.x - dot.x; let dy = mouse.y - dot.y;
                     let distance = Math.sqrt(dx * dx + dy * dy);
-                    let forceDirectionX = dx / distance;
-                    let forceDirectionY = dy / distance;
+                    let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
                     let maxDistance = mouse.radius;
                     let force = (maxDistance - distance) / maxDistance;
                     let directionX = forceDirectionX * force * dot.density;
                     let directionY = forceDirectionY * force * dot.density;
-
                     if (distance < mouse.radius) {
-                        dot.x -= directionX;
-                        dot.y -= directionY;
+                        dot.x -= directionX; dot.y -= directionY;
                     } else {
-                        if (dot.x !== dot.baseX) {
-                            let dx = dot.x - dot.baseX;
-                            dot.x -= dx / 10;
-                        }
-                        if (dot.y !== dot.baseY) {
-                            let dy = dot.y - dot.baseY;
-                            dot.y -= dy / 10;
-                        }
+                        if (dot.x !== dot.baseX) { dot.x -= (dot.x - dot.baseX) / 10; }
+                        if (dot.y !== dot.baseY) { dot.y -= (dot.y - dot.baseY) / 10; }
                     }
-
-                    ctx.beginPath();
-                    ctx.arc(dot.x, dot.y, 1.5, 0, Math.PI * 2);
-                    ctx.fill();
+                    ctx.beginPath(); ctx.arc(dot.x, dot.y, 1.5, 0, Math.PI * 2); ctx.fill();
                 });
-
                 requestAnimationFrame(animate);
             }
-
             resize();
             animate();
         }
@@ -538,74 +522,39 @@
             
             let width, height, layers, allNodes, connections, pulses;
             let mouse = { x: undefined, y: undefined, radius: 150 };
-            let animationFrameId;
+            let animationFrameId = null;
 
-            // FOCUS CHANGE: Create a dual-color system for theme-specific contrast
             const skillsData = [
-                {
-                    layer: "Input Layer",
-                    skills: ["Data", "Curiosity", "Projects"],
-                    color: { dark: "rgba(255, 193, 7, 1)", light: "rgba(186, 136, 0, 1)" }
-                },
-                {
-                    layer: "Generative AI & LLMs",
-                    skills: ["LangChain", "LangGraph", "Transformers", "RAG", "Prompting", "FAISS"],
-                    color: { dark: "rgba(233, 30, 99, 1)", light: "rgba(197, 17, 82, 1)" }
-                },
-                {
-                    layer: "MLOps & Platforms",
-                    skills: ["Databricks", "MLflow", "PySpark", "Docker", "AWS", "Git", "FastAPI"],
-                    color: { dark: "rgba(255, 87, 34, 1)", light: "rgba(208, 68, 11, 1)" }
-                },
-                {
-                    layer: "Core ML & Data Science",
-                    skills: ["PyTorch", "Scikit-Learn", "Pandas", "NumPy", "SQL", "Hugging Face"],
-                    color: { dark: "rgba(33, 150, 243, 1)", light: "rgba(11, 113, 203, 1)" }
-                },
-                {
-                    layer: "Output Layer",
-                    skills: ["AI/ML Engineer"],
-                    color: { dark: "rgba(76, 175, 80, 1)", light: "rgba(46, 125, 50, 1)" }
-                }
+                { layer: "Input Layer", skills: ["Data", "Curiosity", "Projects"], color: { dark: "rgba(255, 193, 7, 1)", light: "rgba(186, 136, 0, 1)" } },
+                { layer: "Generative AI & LLMs", skills: ["LangChain", "LangGraph", "Transformers", "RAG", "Prompting", "FAISS"], color: { dark: "rgba(233, 30, 99, 1)", light: "rgba(197, 17, 82, 1)" } },
+                { layer: "MLOps & Platforms", skills: ["Databricks", "MLflow", "PySpark", "Docker", "AWS", "Git", "FastAPI"], color: { dark: "rgba(255, 87, 34, 1)", light: "rgba(208, 68, 11, 1)" } },
+                { layer: "Core ML & Data Science", skills: ["PyTorch", "Scikit-Learn", "Pandas", "NumPy", "SQL", "Hugging Face"], color: { dark: "rgba(33, 150, 243, 1)", light: "rgba(11, 113, 203, 1)" } },
+                { layer: "Output Layer", skills: ["AI/ML Engineer"], color: { dark: "rgba(76, 175, 80, 1)", light: "rgba(46, 125, 50, 1)" } }
             ];
 
             function resize() {
                 width = canvas.width = canvas.offsetWidth;
                 height = canvas.height = canvas.offsetHeight;
-                
-                layers = [];
-                allNodes = [];
-                connections = [];
-                pulses = [];
-
+                layers = []; allNodes = []; connections = []; pulses = [];
                 const layerCount = skillsData.length;
                 const hPadding = width * 0.08;
                 const layerSpacing = (width - hPadding * 2) / (layerCount - 1);
                 const titleHeight = 80;
                 const nodeAreaHeight = height - titleHeight;
-
-
                 skillsData.forEach((layerData, i) => {
                     const layerNodes = [];
                     const nodeCount = layerData.skills.length;
                     const nodeSpacing = nodeAreaHeight / (nodeCount + 1);
-                    
                     layerData.skills.forEach((skill, j) => {
                         const node = {
-                            x: hPadding + (i * layerSpacing),
-                            y: titleHeight + (nodeSpacing * (j + 1)),
-                            baseRadius: 15,
-                            radius: 15,
-                            label: skill,
-                            color: layerData.color, // Now an object {light, dark}
-                            layerTitle: layerData.layer
+                            x: hPadding + (i * layerSpacing), y: titleHeight + (nodeSpacing * (j + 1)),
+                            baseRadius: 15, radius: 15, label: skill,
+                            color: layerData.color, layerTitle: layerData.layer
                         };
-                        layerNodes.push(node);
-                        allNodes.push(node);
+                        layerNodes.push(node); allNodes.push(node);
                     });
                     layers.push(layerNodes);
                 });
-
                 for (let i = 0; i < layers.length - 1; i++) {
                     layers[i].forEach(node1 => {
                         layers[i+1].forEach(node2 => {
@@ -622,20 +571,93 @@
             }
 
             function stopAnimation() {
-                cancelAnimationFrame(animationFrameId);
-                animationFrameId = null;
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                    animationFrameId = null;
+                }
+            }
+            
+            function animate() {
+                animationFrameId = requestAnimationFrame(animate);
+                
+                ctx.clearRect(0, 0, width, height);
+                const isLightTheme = document.body.classList.contains('light-theme');
+                const secondaryTextColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-text').trim();
+                const primaryTextColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-text').trim();
+
+                pulses.forEach((pulse, index) => {
+                    pulse.progress += pulse.speed;
+                    if (pulse.progress >= 1) { pulses.splice(index, 1); return; }
+                    const { from, to } = pulse.connection;
+                    const pulseX = from.x + (to.x - from.x) * pulse.progress;
+                    const pulseY = from.y + (to.y - from.y) * pulse.progress;
+                    ctx.beginPath();
+                    ctx.arc(pulseX, pulseY, 3, 0, Math.PI * 2);
+                    const fromColor = from.color.dark.replace(/, 1\)/, `, ${0.8 * (1-pulse.progress)})`);
+                    ctx.fillStyle = fromColor;
+                    ctx.fill();
+                });
+
+                connections.forEach(conn => {
+                    const distFrom = mouse.x ? Math.hypot(mouse.x - conn.from.x, mouse.y - conn.from.y) : Infinity;
+                    const distTo = mouse.x ? Math.hypot(mouse.x - conn.to.x, mouse.y - conn.to.y) : Infinity;
+                    const isHovered = (distFrom < mouse.radius || distTo < mouse.radius);
+                    const alpha = isHovered ? 0.5 : 0.2;
+                    ctx.beginPath();
+                    ctx.moveTo(conn.from.x, conn.from.y);
+                    ctx.lineTo(conn.to.x, conn.to.y);
+                    ctx.strokeStyle = secondaryTextColor;
+                    ctx.globalAlpha = alpha;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                });
+                ctx.globalAlpha = 1;
+
+                allNodes.forEach(node => {
+                    const dist = mouse.x ? Math.hypot(mouse.x - node.x, mouse.y - node.y) : Infinity;
+                    const influence = Math.max(0, 1 - dist / mouse.radius);
+                    node.radius = node.baseRadius + influence * 5;
+                    if (influence > 0) {
+                        ctx.beginPath();
+                        ctx.arc(node.x, node.y, node.radius + 10, 0, Math.PI * 2);
+                        const glowColor = node.color.dark.replace(/, 1\)/, `, ${influence * 0.3})`);
+                        ctx.fillStyle = glowColor;
+                        ctx.fill();
+                    }
+                    const themeColor = isLightTheme ? node.color.light : node.color.dark;
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    const nodeFillColor = isLightTheme ? 'rgba(255,255,255,0.4)' : 'rgba(22,27,34,0.4)';
+                    ctx.fillStyle = nodeFillColor;
+                    ctx.fill(); 
+                    ctx.strokeStyle = themeColor;
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+                    ctx.fillStyle = themeColor;
+                    ctx.font = 'bold 16px "Space Grotesk"';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'top';
+                    ctx.fillText(node.label, node.x, node.y + node.radius + 12);
+                });
+
+                skillsData.forEach((layerData, i) => {
+                    const hPadding = width * 0.08;
+                    const layerSpacing = (width - hPadding * 2) / (skillsData.length - 1);
+                    const xPos = hPadding + i * layerSpacing;
+                    ctx.fillStyle = primaryTextColor;
+                    ctx.font = 'bold 16px "Space Grotesk"';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(`[ ${layerData.layer} ]`, xPos, 40);
+                });
             }
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        startAnimation();
-                    } else {
-                        stopAnimation();
-                    }
+                    if (entry.isIntersecting) { startAnimation(); } 
+                    else { stopAnimation(); }
                 });
             }, { root: document.querySelector('.main-content'), threshold: 0.1 });
-
+            
             observer.observe(canvas);
 
             canvas.addEventListener('mousemove', (e) => {
@@ -652,107 +674,13 @@
             setInterval(() => {
                 if (pulses.length < 15 && connections.length > 0) {
                     const conn = connections[Math.floor(Math.random() * connections.length)];
-                    pulses.push({
-                        connection: conn,
-                        progress: 0,
-                        speed: Math.random() * 0.003 + 0.002
-                    });
+                    pulses.push({ connection: conn, progress: 0, speed: Math.random() * 0.003 + 0.002 });
                 }
             }, 150);
-
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-                const isLightTheme = document.body.classList.contains('light-theme');
-                const secondaryTextColor = getComputedStyle(document.documentElement).getPropertyValue('--secondary-text').trim();
-                const primaryTextColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-text').trim();
-
-                pulses.forEach((pulse, index) => {
-                    pulse.progress += pulse.speed;
-                    if (pulse.progress >= 1) {
-                        pulses.splice(index, 1);
-                        return;
-                    }
-                    const { from, to } = pulse.connection;
-                    const pulseX = from.x + (to.x - from.x) * pulse.progress;
-                    const pulseY = from.y + (to.y - from.y) * pulse.progress;
-                    
-                    ctx.beginPath();
-                    ctx.arc(pulseX, pulseY, 3, 0, Math.PI * 2);
-                    // Pulses always use the bright color for visibility
-                    const fromColor = from.color.dark.replace(/, 1\)/, `, ${0.8 * (1-pulse.progress)})`);
-                    ctx.fillStyle = fromColor;
-                    ctx.fill();
-                });
-
-                connections.forEach(conn => {
-                    const distFrom = Math.hypot(mouse.x - conn.from.x, mouse.y - conn.from.y);
-                    const distTo = Math.hypot(mouse.x - conn.to.x, mouse.y - conn.to.y);
-                    const isHovered = mouse.x && (distFrom < mouse.radius || distTo < mouse.radius);
-                    const alpha = isHovered ? 0.5 : 0.2;
-
-                    ctx.beginPath();
-                    ctx.moveTo(conn.from.x, conn.from.y);
-                    ctx.lineTo(conn.to.x, conn.to.y);
-                    ctx.strokeStyle = secondaryTextColor;
-                    ctx.globalAlpha = alpha;
-                    ctx.lineWidth = 1;
-                    ctx.stroke();
-                });
-                ctx.globalAlpha = 1;
-
-                allNodes.forEach(node => {
-                    const dist = mouse.x ? Math.hypot(mouse.x - node.x, mouse.y - node.y) : mouse.radius + 1;
-                    const influence = Math.max(0, 1 - dist / mouse.radius);
-                    
-                    node.radius = node.baseRadius + influence * 5;
-
-                    // Glow effect always uses the bright color
-                    if (influence > 0) {
-                        ctx.beginPath();
-                        ctx.arc(node.x, node.y, node.radius + 10, 0, Math.PI * 2);
-                        const glowColor = node.color.dark.replace(/, 1\)/, `, ${influence * 0.3})`);
-                        ctx.fillStyle = glowColor;
-                        ctx.fill();
-                    }
-                    
-                    // FOCUS CHANGE: Select the correct color for the current theme
-                    const themeColor = isLightTheme ? node.color.light : node.color.dark;
-
-                    // Draw the node circle
-                    ctx.beginPath();
-                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                    const nodeFillColor = isLightTheme ? 'rgba(255,255,255,0.4)' : 'rgba(22,27,34,0.4)';
-                    ctx.fillStyle = nodeFillColor;
-                    ctx.fill(); 
-                    ctx.strokeStyle = themeColor; // Use theme-specific color for border
-                    ctx.lineWidth = 2;
-                    ctx.stroke();
-
-                    // Draw the text
-                    ctx.fillStyle = themeColor; // Use theme-specific color for text
-                    ctx.font = 'bold 16px "Space Grotesk"';
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'top';
-                    ctx.fillText(node.label, node.x, node.y + node.radius + 12);
-                });
-
-                skillsData.forEach((layerData, i) => {
-                    const hPadding = width * 0.08;
-                    const layerSpacing = (width - hPadding * 2) / (skillsData.length - 1);
-                    const xPos = hPadding + i * layerSpacing;
-                    ctx.fillStyle = primaryTextColor;
-                    ctx.font = 'bold 16px "Space Grotesk"';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(`[ ${layerData.layer} ]`, xPos, 40);
-                });
-
-                animationFrameId = requestAnimationFrame(animate);
-            }
 
             window.addEventListener('resize', resize);
             resize();
         }
-
 
         // --- Run Everything on Page Load ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -765,7 +693,6 @@
             initGenerativeBackground();
             initNeuralNetwork();
         });
-
     </script>
 </body>
 </html>
