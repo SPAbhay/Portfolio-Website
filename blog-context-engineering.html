@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en" class="case-study-page-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ghost in the Machine | Abhay Arora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Simple pre/code block styling for consistency */
+        pre {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 1.5rem 0;
+            white-space: pre-wrap;
+        }
+        code {
+            font-family: inherit;
+            background-color: rgba(var(--primary-text-rgb), 0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            font-size: 1em;
+        }
+        .code-comment {
+            color: var(--secondary-text);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="case-study-page">
+    <canvas id="generative-background"></canvas>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="scrollProgressBar"></div>
+    </div>
+
+    <div class="portfolio-wrapper">
+        <aside class="left-sidebar">
+            <div class="sidebar-content">
+                <a href="index.html" class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 100 100"><rect class="logo-bg" width="100" height="100" rx="20"/><text class="logo-text" x="50" y="68" font-size="50" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="bold">A</text></svg>
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                         <li><a href="index.html#work" title="Work"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><span>Work</span></a></li>
+                        <li><a href="index.html#profile" title="Profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></a></li>
+                        <li><a href="index.html#contact" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><span>Contact</span></a></li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="case-study-header">
+                <div class="container">
+                    <a href="index.html#work" class="back-link">&larr; Back to all projects</a>
+                    <h1>The Ghost in the Machine: Why Context is the New Code</h1>
+                    <p class="case-study-subtitle">A practical guide to moving beyond generic prompts and building AI that actually works.</p>
+                </div>
+            </section>
+
+            <section class="case-study-content">
+                <div class="container case-study-container">
+                    <div class="case-study-sidebar">
+                        <h4>Post Details</h4>
+                        <ul>
+                            <li><strong>Published:</strong> Oct 17, 2025</li>
+                            <li><strong>Read Time:</strong> ~13 minutes</li>
+                            <li><strong>Author:</strong> Abhay Arora</li>
+                            <li><strong>Tags:</strong></li>
+                            <li class="tech-list">GenAI, MLOps, RAG, LangGraph, System Architecture</li>
+                        </ul>
+                    </div>
+                    <div class="case-study-main">
+                        <h3>The "1-2-3" Problem</h3>
+                        <p>A few months back, my manager, Khushalie Nagpal, said something that completely reframed how I think about building with AI. We were debating the path for a new feature, and she cut through the noise: "A traditional product is a 1-2-3 path. A service is a winding road."</p>
+                        <p>It's simple, but it's dead on. A classic software product has defined steps. You click a button, a predictable thing happens. The path is linear. But a service? A service has to adapt. It asks questions, clarifies, and navigates the messy, unpredictable reality of a client's problem. Our team, like many, started out chasing the dream of a clean, generalized AI product—the "1-2-3" path. We wanted a tool that could solve a problem for everyone, right out of the box.</p>
+                        <p>We learned pretty quickly that what we'd built wasn't a product. It was a ghost.</p>
+                        <p>A base LLM is a ghost in a machine. It’s brilliant, eloquent, and seems capable of anything, but it’s an amnesiac. It has no memory, no attachments, and no real understanding of *our* world. Asking it to solve a specific business problem is like asking a ghost to organize an office—it has incredible power, but it'll phase right through the filing cabinets because it doesn't understand the physical reality of the room or the urgent need for last quarter's reports.</p>
+                        <p>This is where our real work as engineers begins. The job isn't just to talk to the ghost; it's to build the entire house it haunts. We call this **Context Engineering**.</p>
+                        
+                        <h3>Context Isn't a Prompt, It's an Architecture</h3>
+                        <p>Let's get one thing straight: this isn't about "prompt engineering." That term implies the secret is just a clever turn of phrase. A prompt is the *final* command you give the AI. Context engineering is the entire universe of information you construct *before* that command is ever spoken. It's the architecture that gives the AI a world to interact with, a world built on four distinct pillars.</p>
+
+                        <h4>Pillar 1: Domain Context (The Blueprints)</h4>
+                        <p>The ghost is fluent in English, but not in the dialect of your business. A legal AI that doesn't understand the nuance between a "motion to dismiss" and a "motion for summary judgment" is a liability. It will generate text that is grammatically perfect and legally disastrous. This specialized language, these unwritten rules, are the blueprints of the domain.</p>
+                        <p><strong>Technique: RAG over Fine-Tuning.</strong>
+                        <br>
+                        The temptation is to fine-tune a model on a domain-specific corpus. While that has its place—mostly for teaching *style* or *format*, not knowledge—it's often a sledgehammer for a nail. It's expensive, static, and you can't easily update or retract knowledge. For 95% of use cases, Retrieval-Augmented Generation (RAG) is the pragmatic, powerful answer. We build a specialized, private library for the ghost to read from. Before answering a question, the AI first retrieves the most relevant documents from this library. This keeps the knowledge current, auditable, and specific.</p>
+                        <p>An AI for a financial analyst doesn't just answer "What are the risks for Company X?" It first performs a semantic search across a vector database of their SEC filings, earnings call transcripts, and internal reports. The LLM's job isn't to *know* the answer, but to *synthesize* an answer from the highly relevant, domain-specific documents it's just been handed.</p>
+
+                        <h4>Pillar 2: Process Context (The Hallways)</h4>
+                        <p>This is the winding road. A real business task is rarely a single question and answer. It's a sequence of steps, decisions, and loops. A tool that generates brilliant code is useless if it doesn't fit into a developer's workflow of writing, testing, getting feedback, and refactoring.</p>
+                        <p><strong>Technique: Agentic State Machines with LangGraph.</strong>
+                        <br>
+                        To model a process, we have to move beyond simple chains (`Input -> LLM -> Output`). We need a graph. This is where tools like **LangGraph** are game-changers. We model the process as a state machine where each node is a step and the edges are the logic that determines what happens next. It's not just a pipeline; it's a playbook.</p>
+                        <pre><code><span class="code-comment"># A more realistic agent for drafting a marketing email</span>
+from langgraph.graph import StateGraph, END
+
+class MarketingWorkflow:
+    def plan_email(self, state):
+        <span class="code-comment"># Step 1: Create a plan. What's the goal? Who's the audience?</span>
+        plan = llm.invoke("Create a plan for an email about {topic}", state)
+        state['plan'] = plan
+        return state
+
+    def draft_from_plan(self, state):
+        <span class="code-comment"># Step 2: Write the first draft based on the plan.</span>
+        draft = llm.invoke("Draft an email based on this plan: {plan}", state)
+        state['draft'] = draft
+        return state
+        
+    def critique_draft(self, state):
+        <span class="code-comment"># Step 3: Use another LLM call to act as a critic.</span>
+        critique = llm.invoke("Critique this draft: {draft}. Is it on-brand?", state)
+        state['critique'] = critique
+        return state
+
+    def should_revise(self, state):
+        <span class="code-comment"># Step 4: A conditional edge. Does it need work?</span>
+        if "REVISE" in state['critique']:
+            return "revise_draft"
+        else:
+            return END
+
+    def revise_draft(self, state):
+        <span class="code-comment"># Step 5: A feedback loop. Refine the draft based on critique.</span>
+        revised_draft = llm.invoke("Revise this draft {draft} based on the critique: {critique}", state)
+        state['draft'] = revised_draft
+        state['revisions_count'] += 1 <span class="code-comment"># Prevent infinite loops!</span>
+        return state
+</code></pre>
+                        <p>This graph *is* the process context. It gives the AI a map, turning the winding road into a set of well-defined hallways. It knows what to do when things go right, what to do when they go wrong, and when to stop and ask for directions. It's how you build systems that don't just answer, they *work*.</p>
+
+                        <h4>Pillar 3: Data Context (The Library)</h4>
+                        <p>This is the soul of the operation: the user's private, proprietary information. But simply connecting to a database isn't enough. The real challenge isn't access; it's retrieval. Finding the three most relevant paragraphs from a million documents is a hard engineering problem.</p>
+                        <p><strong>Technique: A Thoughtful Retrieval Pipeline.</strong>
+                        <br>
+                        Effective RAG isn't a single step; it's a pipeline. `Load -> Split -> Embed -> Store -> Retrieve`. Every step is a chance to win or lose.
+                        <ul>
+                            <li><strong>Splitting (Chunking):</strong> How you split documents is critical. A `RecursiveCharacterTextSplitter` is a good start, but it can be dumb. It might cut a key idea in half. For better results, you look at semantic chunking or agentic chunking, where you use an LLM to decide the most logical places to split a document based on its meaning.</li>
+                            <li><strong>Embedding & Storage:</strong> You turn these chunks into vectors using a model like `text-embedding-3-large` and store them in a vector DB like Supabase with `pgvector` or Pinecone. But don't just store the vector! Store rich metadata alongside it: `created_date`, `author`, `document_type`, `version`. This is your superpower.</li>
+                            <li><strong>Retrieval:</strong> This is where the magic happens. Don't just do a simple vector search. First, use the metadata to filter the search space (e.g., `WHERE document_type = 'API_DOCS' AND created_date > '2024-01-01'`). Then, on that smaller, more relevant subset, you perform the semantic search. For even better results, you can use a re-ranker (like Cohere's) to take the top 20 results from your vector search and use a more powerful model to find the absolute best 3-5 to actually send to the final LLM.</li>
+                        </ul>
+                        <p>A good retrieval system is the difference between an AI that says "I can't find anything" and one that surfaces the exact paragraph you forgot you wrote two years ago.</p>
+
+                        <h4>Pillar 4: Persona Context (The Voice)</h4>
+                        <p>Finally, who is the ghost supposed to *be*? A helpful butler? A sharp-witted analyst? A creative muse? And who are you? A CEO who needs three bullets, or a junior dev who needs a code block? This is the final layer of paint on the house.</p>
+                        <p><strong>Technique: Engineering the System Prompt.</strong>
+                        <br>
+                        A good persona is engineered. It's a detailed system prompt that acts as the AI's constitution.
+                        <br><br>
+                        **Generic Prompt:** <br>
+                        `"You are a helpful assistant."`
+                        <br><br>
+                        **Engineered Prompt:**
+                        <pre><code>You are an acerbic but brilliant senior software engineer with 20 years of experience at Google. You value clarity, correctness, and brevity above all else. You have no patience for junior engineers who ask lazy questions.
+
+Your Rules:
+1.  **NEVER** apologize or use hedge words like "maybe," "perhaps," or "I think." State facts.
+2.  **ALWAYS** provide a concise code example to illustrate your point.
+3.  If the user's question is vague, ask for a specific code snippet to clarify. Do not guess.
+4.  Your tone is blunt, direct, and to the point, but never insulting.
+
+Example:
+User: "How do I use async in Python?"
+Your Response: "Your question is too broad. Show me the I/O-bound code you're trying to parallelize. For example, if you're making multiple network requests, you'd use `asyncio.gather` like this: ..."</code></pre>
+                        <p>This detailed persona context transforms a generic chatbot into a valuable, specialized collaborator.</p>
+
+                        <h3>From Service to Product</h3>
+                        <p>This brings us back to the winding road. You can't build a generalized, "1-2-3" product that masters context engineering from day one. It's impossible. The path forward is to embrace the consultancy mindset.</p>
+                        <p>Start with one user. Get on a call. Manually build their house. Write Python scripts to ingest their specific documents. Hardcode their workflow into a LangGraph agent. Craft a system prompt that mimics their company's exact tone of voice. You are, in effect, providing a white-glove AI consulting service.</p>
+                        <p>Once it works beautifully for them, you find a second user. You'll discover 70% of the context engineering overlaps. You start to see the patterns. The product you ultimately build, then, isn't a generic text box. It's a machine for onboarding a user's context. The features you develop are elegant UIs for automating the four pillars we just discussed.</p>
+                        <p>The goal is to eventually pave the winding road into a highway. But the only way to know where to lay the asphalt is to walk the dirt path first. Building a great AI product isn't about avoiding the mess; it's about going deep into one user's mess, solving it completely, and then building the machine that can do it for everyone.</p>
+                    </div>
+                </div>
+            </section>
+             <footer>
+                <div class="container">
+                    <p>&copy; 2025 Abhay Arora. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+
+        <aside class="right-sidebar">
+             <div class="social-links">
+                <a href="https://linkedin.com/in/abhay-arora-digital" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                <a href="https://github.com/SPAbhay" target="_blank" title="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
+                <a href="[LEETCODE PROFILE LINK]" target="_blank" title="LeetCode"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 5.844a1.38 1.38 0 0 0-.438.961v10.392a1.38 1.38 0 0 0 .438.961l5.405 5.405a1.373 1.373 0 0 0 .961.438h7.034a1.373 1.373 0 0 0 .961-.438l5.405-5.405a1.38 1.38 0 0 0 .438-.961V5.844a1.38 1.38 0 0 0-.438-.961L21.478.438a1.374 1.374 0 0 0-.961-.438h-7.034zM2 12h3.5v3.5H2V12zm6.5 0H12v3.5H8.5V12zM2 17.5h3.5V21H2v-3.5zm6.5 0H12V21H8.5v-3.5z"/></svg></a>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // All original JS is preserved here for functionality
+        function initPage() {
+            const mainContent = document.querySelector('.main-content');
+            mainContent.addEventListener('scroll', () => {
+                const scrollTop = mainContent.scrollTop;
+                const scrollHeight = mainContent.scrollHeight - mainContent.clientHeight;
+                const scrolled = (scrollTop / scrollHeight) * 100;
+                document.getElementById("scrollProgressBar").style.width = scrolled + "%";
+            });
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme) { body.classList.add(currentTheme); } 
+            else if (!window.matchMedia || window.matchMedia('(prefers-color-scheme: dark)').matches) { body.classList.remove('light-theme'); } 
+            else { body.classList.add('light-theme'); }
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-theme');
+                let theme = body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
+                localStorage.setItem('theme', theme);
+            });
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const interactiveElements = document.querySelectorAll('a, button, details, summary');
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseover', () => cursorOutline.classList.add('grow'));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('grow'));
+            });
+        }
+        function startAnimations() {
+            const socialLinks = document.querySelectorAll('.right-sidebar .social-links a');
+            socialLinks.forEach(link => {
+                const icon = link.querySelector('svg');
+                link.addEventListener('mousemove', (e) => {
+                    const { left, top, width, height } = link.getBoundingClientRect();
+                    const centerX = left + width / 2;
+                    const centerY = top + height / 2;
+                    const deltaX = e.clientX - centerX;
+                    const deltaY = e.clientY - centerY;
+                    const moveX = -deltaX * 0.5;
+                    const moveY = -deltaY * 0.5;
+                    gsap.to(icon, { x: moveX, y: moveY, duration: 0.6, ease: "power3.out" });
+                });
+                link.addEventListener('mouseleave', () => {
+                    gsap.to(icon, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" });
+                });
+            });
+        }
+        function initGenerativeBackground() {
+            const canvas = document.getElementById('generative-background');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height, dots;
+            const mouse = { x: null, y: null, radius: 150 };
+            function resize() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+                dots = [];
+                const dotSpacing = 40;
+                const columns = Math.floor(width / dotSpacing);
+                const rows = Math.floor(height / dotSpacing);
+                for (let x = 0; x < columns; x++) {
+                    for (let y = 0; y < rows; y++) {
+                        dots.push({ baseX: (x * dotSpacing) + (dotSpacing / 2), baseY: (y * dotSpacing) + (dotSpacing / 2), x: (x * dotSpacing) + (dotSpacing / 2), y: (y * dotSpacing) + (dotSpacing / 2), density: (Math.random() * 30) + 1 });
+                    }
+                }
+            }
+            window.addEventListener('resize', resize);
+            window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                const dotColor = document.body.classList.contains('light-theme') ? 'rgba(36, 41, 47, 0.2)' : 'rgba(201, 209, 217, 0.2)';
+                ctx.fillStyle = dotColor;
+                dots.forEach(dot => {
+                    let dx = mouse.x - dot.x; let dy = mouse.y - dot.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
+                    let maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    let directionX = forceDirectionX * force * dot.density;
+                    let directionY = forceDirectionY * force * dot.density;
+                    if (distance < mouse.radius) {
+                        dot.x -= directionX; dot.y -= directionY;
+                    } else {
+                        if (dot.x !== dot.baseX) { dot.x -= (dot.x - dot.baseX) / 10; }
+                        if (dot.y !== dot.baseY) { dot.y -= (dot.y - dot.baseY) / 10; }
+                    }
+                    ctx.beginPath(); ctx.arc(dot.x, dot.y, 1.5, 0, Math.PI * 2); ctx.fill();
+                });
+                requestAnimationFrame(animate);
+            }
+            resize();
+            animate();
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap === 'undefined') { console.error("GSAP not loaded!"); return; }
+            initPage();
+            startAnimations();
+            initGenerativeBackground();
+        });
+    </script>
+</body>
+</html>

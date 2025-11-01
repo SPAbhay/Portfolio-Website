@@ -9,6 +9,7 @@
 --card-bg-rgb: 33, 38, 45; /* RGB version for transparency */
 --border-color: #30363D;
 --accent-color: #FF6B4A;
+--accent-color-rgb: 255, 107, 74; /* RGB for new glow effect */
 --accent-hover: #f5785c;
 --logo-bg: #C9D1D9;
 --logo-text: #161B22;
@@ -26,6 +27,7 @@ body.light-theme {
 --card-bg-rgb: 255, 255, 255; /* RGB version for transparency */
 --border-color: #D0D7DE;
 --accent-color: #F78166;
+--accent-color-rgb: 247, 129, 102; /* RGB for new glow effect */
 --accent-hover: #e76143;
 --logo-bg: #24292F;
 --logo-text: #F6F8FA;
@@ -190,6 +192,9 @@ animation: float 6s ease-in-out infinite; /* Add floating animation */
 .social-links a:nth-child(2) {
 animation-delay: 1.5s; /* Delay the second icon's animation */
 }
+.social-links a:nth-child(3) {
+animation-delay: 3s; /* Delay the third icon's animation */
+}
 
 @keyframes float {
 0% { transform: translateY(0px); }
@@ -232,6 +237,11 @@ padding: 6rem 0;
 border-bottom: 1px solid var(--border-color);
 transition: border-color 0.3s ease;
 }
+
+section:last-of-type {
+    border-bottom: none;
+}
+
 
 h1, h2, h3, h4 {
 margin-top: 0;
@@ -281,8 +291,9 @@ color: #fff;
 padding: 0.8rem 1.8rem;
 border-radius: 8px;
 font-weight: 500;
-transition: background-color 0.3s ease, box-shadow 0.3s ease;
+transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 cursor: pointer;
+border: 1px solid transparent;
 }
 
 .btn:hover {
@@ -369,9 +380,10 @@ color: var(--accent-color);
 .hero-tagline {
 font-size: 1.2rem;
 color: var(--secondary-text);
-max-width: 450px;
+max-width: 550px; /* Wider for the new tagline */
 text-align: center;
 margin-top: 1.5rem;
+line-height: 1.7;
 }
 
 /* --- Marquee Styles --- */
@@ -389,7 +401,7 @@ user-select: none;
 .marquee-content {
 display: flex;
 white-space: nowrap;
-animation: marquee-scroll 45s linear infinite;
+animation: marquee-scroll 20s linear infinite; /* Slowed down scroll */
 }
 .marquee-content span {
 font-size: 1.5rem;
@@ -413,10 +425,19 @@ to { transform: translateX(-50%); }
 
 /* --- OTHER SECTIONS --- */
 
-#about p {
-font-size: 1.2rem;
-line-height: 1.8;
+.profile-subsection:not(:last-child) {
+    padding-bottom: 6rem;
+    border-bottom: 1px solid var(--border-color);
 }
+
+.profile-subsection:last-child {
+    padding-bottom: 0;
+}
+
+#profile {
+    padding-bottom: 0;
+}
+
 
 #work {
 padding: 6rem 0 0 0;
@@ -452,22 +473,16 @@ overflow: hidden;
 .project-card-overlay h3 {
 font-size: 3.5rem;
 }
-.project-card-overlay p {
-font-size: 1.4rem;
-}
-
-.experience-details h3 {
-font-size: 1.6rem;
-}
-.experience-details .description {
-font-size: 1.1rem;
-}
 
 .blog-content h3 {
 font-size: 1.5rem;
+margin-bottom: 0.75rem;
+color: var(--primary-text);
 }
 .blog-content p {
-font-size: 1.1rem;
+font-size: 1rem;
+color: var(--secondary-text);
+line-height: 1.7;
 }
 
 /* --- Get in Touch Section --- */
@@ -493,8 +508,6 @@ margin-bottom: 3rem;
 color: var(--accent-color);
 }
 
-
-/* --- All other original styles from this point are preserved --- */
 #experience {
 max-width: 800px;
 margin: 0 auto;
@@ -511,9 +524,16 @@ transition: border-color 0.3s ease;
 border-bottom: none;
 }
 
+.experience-details h3 {
+font-size: 1.6rem;
+}
 .experience-details .company-date {
 color: var(--secondary-text);
-margin-bottom: 1rem;
+margin-bottom: 0.5rem;
+}
+.experience-details .description {
+    font-size: 1rem;
+    color: var(--secondary-text);
 }
 
 .company-logo {
@@ -523,6 +543,7 @@ flex-shrink: 0;
 width: 100px;
 height: auto;
 filter: var(--logo-filter, none);
+transition: filter 0.3s ease;
 }
 body.light-theme .company-logo img {
 --logo-filter: invert(1);
@@ -554,7 +575,9 @@ position: relative;
 z-index: 3;
 text-align: center;
 color: white;
+padding: 2rem;
 }
+
 .project-progress-container {
 position: absolute;
 bottom: 50px;
@@ -588,11 +611,15 @@ display: block;
 }
 
 .blog-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-gap: 2rem;
+    display: grid;
+    /* Updated for up to 3 columns on larger screens */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    transition: max-height 0.5s ease-in-out;
 }
 .blog-card-small {
+display: block; /* Make the whole card a block-level link */
+text-decoration: none;
 background-color: var(--card-bg);
 border-radius: 12px;
 border: 1px solid var(--border-color);
@@ -601,7 +628,7 @@ transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s eas
 }
 .blog-card-small:hover {
 transform: translateY(-5px);
-box-shadow: 0 0 25px 0px rgba(255, 107, 74, 0.15);
+box-shadow: 0 8px 30px rgba(var(--card-bg-rgb), 0.1), 0 0 20px rgba(var(--accent-color-rgb), 0.1);
 }
 .blog-thumbnail {
 width: 100%;
@@ -616,6 +643,9 @@ transition: border-color 0.3s ease;
 }
 .blog-content {
 padding: 1.5rem;
+display: flex;
+flex-direction: column;
+flex-grow: 1;
 }
 
 footer {
@@ -676,7 +706,7 @@ transition: all 0.3s ease-out;
 }
 .cursor-outline.grow {
 transform: translate(-50%, -50%) scale(1.5);
-background-color: rgba(255, 107, 74, 0.1);
+background-color: rgba(var(--accent-color-rgb), 0.1);
 }
 
 /* --- Responsive Design --- */
@@ -690,9 +720,425 @@ background-color: rgba(255, 107, 74, 0.1);
 
 @media (max-width: 768px) {
 h2 { font-size: 2.5rem; }
-.hero-background-text { font-size: 25vw; }
-.marquee-content span { font-size: 1.2rem; }
-.hero-side-text { left: -3vw; bottom: 15vw; }
-.hero-main-heading { right: 2rem; }
+.project-card-overlay h3 { font-size: 2.5rem; }
 .contact-heading { font-size: clamp(2.5rem, 12vw, 6rem); }
 }
+
+
+/* --- NEW STYLES V2 --- */
+/* These are the only additions. All original styles above are preserved. */
+.project-hook {
+    font-size: 1.2rem;
+    color: #C9D1D9; /* A slightly softer white for the hook */
+    max-width: 450px;
+    margin: 0.5rem auto 1.5rem auto;
+    line-height: 1.5;
+}
+
+.project-tech-stack {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+}
+
+.project-tech-stack span {
+    background-color: rgba(var(--primary-text-rgb), 0.1);
+    color: var(--primary-text);
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: 1px solid var(--border-color);
+}
+
+.project-cta-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.link-secondary {
+    color: var(--secondary-text);
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.link-secondary::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.link-secondary:hover::after {
+    width: 100%;
+}
+.link-secondary:hover {
+    color: var(--primary-text);
+}
+
+.about-text {
+    font-size: 1.1rem;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--secondary-text);
+    line-height: 1.8;
+}
+.about-text:not(:last-child) {
+    margin-bottom: 1.5rem;
+}
+
+.right-sidebar .social-links a[title="LeetCode"] svg {
+    width: 28px; /* Slightly larger to match visual weight */
+    height: 28px;
+}
+
+@media (max-width: 768px) {
+    .project-hook { font-size: 1rem; }
+}
+
+.case-study-header {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.back-link {
+    display: block;
+    margin-bottom: 2rem;
+    color: var(--secondary-text);
+    font-weight: 500;
+}
+.back-link:hover {
+    color: var(--primary-text);
+}
+
+.case-study-header h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+}
+
+.case-study-subtitle {
+    font-size: 1.25rem;
+    color: var(--secondary-text);
+    max-width: 650px;
+    margin: 0 auto 2.5rem auto;
+}
+
+.case-study-video {
+    padding: 4rem 0;
+}
+.video-placeholder-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+}
+.video-placeholder-aspect {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.video-placeholder-content {
+    color: var(--secondary-text);
+    font-size: 1.2rem;
+}
+
+.case-study-content {
+    padding-bottom: 6rem;
+}
+.case-study-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+}
+.case-study-sidebar h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-text);
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+.case-study-sidebar ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.95rem;
+    color: var(--secondary-text);
+}
+.case-study-sidebar li {
+    margin-bottom: 0.75rem;
+}
+.case-study-sidebar li.tech-list {
+    line-height: 1.7;
+}
+
+.case-study-main h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+.case-study-main p {
+    color: var(--secondary-text);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+.image-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--secondary-text);
+    margin: 2rem 0 0.5rem 0;
+}
+.caption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    margin-bottom: 3rem;
+}
+
+.accordion-item {
+    border-bottom: 1px solid var(--border-color);
+}
+.accordion-item:last-child {
+    border-bottom: none;
+}
+.accordion-item summary {
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 1.5rem 0;
+    cursor: pointer;
+    list-style: none; /* Hide default marker */
+    position: relative;
+    padding-right: 2rem;
+}
+.accordion-item summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+.accordion-item[open] summary::after {
+    transform: translateY(-50%) rotate(45deg);
+}
+.accordion-content {
+    padding-bottom: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .case-study-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    .case-study-sidebar {
+        grid-row: 1; /* Move sidebar to the top on mobile */
+    }
+}
+
+body.case-study-page .main-content {
+    height: auto; /* Allows the container to grow with its content */
+    min-height: 100vh; /* Ensures the footer stays at the bottom on short pages */
+}
+
+.case-study-page-html,
+.case-study-page {
+    height: auto;
+    overflow: auto; 
+}
+
+/* 2. Remove the fixed height from the main content containers */
+.case-study-page .portfolio-wrapper,
+.case-study-page .main-content {
+    height: auto;
+    overflow: visible;
+}
+
+
+/* --- New Styles for index.html --- */
+
+/* 1. Hero Section CTAs */
+.hero-cta-group {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-color);
+    color: #fff;
+}
+
+/* 2. Work Section Subheadings for Visual Separation */
+.section-subheading {
+    font-size: 1.8rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--secondary-text);
+    margin-bottom: 2.5rem;
+    margin-top: 4rem; /* Adds space between the two grids */
+}
+
+/* Make sure the first subheading doesn't have extra top margin */
+#work .section-subheading:first-of-type {
+    margin-top: 0;
+}
+
+/* Adjust main section title since we now have subheadings */
+#work h2 {
+    margin-bottom: 3rem;
+}
+
+.case-study-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Each card takes full width */
+    gap: 2.5rem;
+    margin-bottom: 4rem; /* Space before the "Thoughts & Articles" subheading */
+}
+
+.case-study-feature-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.case-study-feature-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(var(--accent-color-rgb), 0.5);
+    box-shadow: 0 10px 40px rgba(var(--accent-color-rgb), 0.15);
+}
+
+/* The "Legendary" animated border effect on hover - REMOVED */
+.case-study-feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background: radial-gradient(800px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(var(--accent-color-rgb), 0.15), transparent 40%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.case-study-feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-card-content {
+    color: var(--primary-text);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 2; /* Ensure content is above the pseudo-element */
+}
+
+.feature-card-tag {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: #fff;
+    padding: 0.2rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    align-self: flex-start;
+}
+
+.feature-card-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card-content p {
+    color: var(--secondary-text);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.feature-card-focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: auto; /* Pushes to the bottom */
+}
+
+.feature-card-focus span {
+    background-color: rgba(var(--primary-text-rgb), 0.1);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.feature-card-visual {
+    background-color: #000;
+    border-radius: 12px;
+    min-height: 300px;
+    transition: transform 0.4s ease;
+    z-index: 2; /* Ensure visual is above the pseudo-element */
+}
+
+.case-study-feature-card:hover .feature-card-visual {
+    transform: scale(1.03);
+}
+
+/* Make feature cards stack on mobile */
+@media (max-width: 768px) {
+    .case-study-feature-card {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+    }
+    .feature-card-content h3 {
+        font-size: 1.5rem;
+    }
+    .feature-card-visual {
+        grid-row: 1; /* Move image to top on mobile */
+    }
+}
+
