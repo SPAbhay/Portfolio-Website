@@ -279,9 +279,38 @@ Based *only* on the user's persona and the 5 articles provided below, do the fol
                         <h3>The MLOps War Stories (aka The Hard Problems)</h3>
                         <p>A clean architecture diagram is a beautiful lie. It hides the brutal, hair-pulling, "why-is-this-not-working-at-2-AM" moments. The real, senior-level engineering is in the "backbone"—the MLOps foundation that makes this whole thing run.</p>
                         <p>Here are the war stories.</p>
-                        
                         <details class="accordion-item">
-                            <summary>War Story #1: The 10-Second "Init" Timeout Wall</summary>
+                            <summary>War Story #1: The "Noisy Neighbor" & The 17-Second Latency Trap</summary>
+                            <div class="accordion-content">
+
+                            <p><strong>The Challenge:</strong><br>
+                            The system was live. It worked. But it felt… sluggish. When I stress-tested it, the first few requests were snappy (~2.5s), but by the 5th concurrent request, latency spiked to a painful <strong>17 seconds</strong>.
+                            </p>
+
+                            <p><strong>The Diagnosis:</strong><br>
+                            I suspected the Cross-Encoder was heavy, but 17 seconds? CloudWatch revealed the real culprit: <strong>CPU throttling</strong> on AWS Fargate burstable instances.
+                            </p>
+
+                            <p>
+                            The first few requests burned through CPU credits. After that, AWS throttled the container to baseline performance. Worse, my pipeline was sequential—waiting for summary 1, then summary 2—holding CPU while doing nothing but waiting on network I/O.
+                            </p>
+
+                            <p><strong>The Solution: Async Fan-Out</strong></p>
+                            <ol>
+                            <li><strong>Algorithmic Fix:</strong> Reduced re-ranking window (<code>top_k</code>) from 50 → 15, cutting compute by ~70%.</li>
+                            <li><strong>I/O Fix:</strong> Refactored summary generation to <strong>async parallel execution</strong> using <code>asyncio.gather</code>.</li>
+                            </ol>
+
+                            <p><strong>The Result:</strong></p>
+                            <ul>
+                            <li><strong>Latency:</strong> Dropped from <strong>17s → ~6s</strong> end-to-end</li>
+                            <li><strong>Efficiency:</strong> Shifted from CPU-bound to I/O-bound, enabling far higher concurrency on the same hardware</li>
+                            </ul>
+
+                            </div>
+                            </details>
+                        <details class="accordion-item">
+                            <summary>War Story #2: The 10-Second "Init" Timeout Wall</summary>
                             <div class="accordion-content">
                                 <p><strong>The Challenge:</strong> Our ingestion-service Lambda kept failing. And failing. And failing. I'm digging into CloudWatch logs and I see the dreaded message:</p>
                                 <blockquote>INIT_REPORT Init Duration: 9999.49 ms Status: timeout</blockquote>
@@ -338,7 +367,7 @@ def ingest(event, context):
                         </details>
                         
                         <details class="accordion-item">
-                            <summary>War Story #2: The "It Works On My (M3) Mac" Nightmare</summary>
+                            <summary>War Story #3: The "It Works On My (M3) Mac" Nightmare</summary>
                             <div class="accordion-content">
                                 <p><strong>The Challenge:</strong> This one was a killer. I mean, this one really hurt. I built all my <code>arm64</code> Docker images on my Mac M3. The GitHub Actions runner (an <code>x86_64</code> machine) built them just fine. The deploy pipeline was green. But the <code>arm64</code> Lambda function would crash instantly. Just... poof. Gone.</p>
                                 <p><strong>The Reason:</strong> I was building an <code>arm64</code> image on an <code>arm64</code> machine (my Mac). The GitHub runner was <em>emulating</em> an <code>arm64</code> build on an <code>x86</code> machine. But it wasn't a true cross-compilation. The resulting image was subtly broken.</p>
@@ -404,7 +433,7 @@ jobs:
                         </details>
                         
                         <details class="accordion-item">
-                            <summary>War Story #3: The API's Identity Crisis</summary>
+                            <summary>War Story #4: The API's Identity Crisis</summary>
                             <div class="accordion-content">
                                 <p><strong>The Challenge:</strong> My first instinct was to use FastAPI for all my Python services, even in Lambda. I'd use the <code>mangum</code> adapter to translate AWS events into HTTP. But for the simple services, it was just... deaf. It was adding 100 lines of boilerplate, new dependencies, and a new failure point for literally no reason. Why run a whole web server just to parse a JSON and call a database?</p>
                                 <p><strong>My Solution:</strong> The Ultimate Abstraction is Removing the Abstraction. I threw out FastAPI and <code>mangum</code> for the simple services. I rewrote them as 100% pure, 30-line Python handlers. The <code>interaction-service</code> is the perfect example. It has zero dependencies outside the standard library and <code>supabase-client</code>.</p>
