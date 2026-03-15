@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Study: The What's Good Blueprint | Abhay Arora</title>
+    <title>What's Good: AI Systems | Abhay Arora</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -13,73 +13,13 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* * === THE NEW FIX FOR TEXT OVERFLOW / OVERLAP ===
-         * This rule forces the container to clip and the paragraphs
-         * to wrap their text.
-         */
-        .case-study-main {
-            overflow-x: hidden; /* Prevents horizontal scroll */
-        }
-
-        .case-study-main p {
-            position: static !important;
-            display: block !important;
-            margin-top: 0 !important;
-            margin-bottom: 1.25rem !important;
-            line-height: 1.7 !important;
-            transform: none !important;
-            height: auto !important;
-            opacity: 1 !important;
-            z-index: 1;
-
-            /* * === FORCING TEXT WRAP === */
-            width: 100% !important; /* Respect container */
-            max-width: 100% !important;
-            white-space: normal !important; /* This is the main fix */
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
-        }
-
-        /* * === STYLING FOR CODE BLOCKS & QUOTES ===
-         * Using solid colors as requested, no variables.
-         */
-        .case-study-main pre {
-            background-color: #2D2D2D; /* Solid dark grey */
-            color: #d4d4d4;
-            padding: 1rem;
-            border-radius: 8px;
-            overflow-x: auto; 
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-            margin: 1.5rem 0;
-            white-space: pre; 
-        }
-        .case-study-main code {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.9rem;
-        }
-        .case-study-main p > code,
-        .case-study-main li > code {
-            background-color: #333333; /* Solid grey */
-            color: #AAAAAA; /* Solid light grey */
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-        
-        .case-study-main blockquote {
-            border-left: 4px solid #4ade80; /* Solid green */
-            padding-left: 1rem;
-            margin: 1.5rem 0;
-            font-style: italic;
-            color: #9CA3AF; /* Solid subtle text */
-            background-color: #222222; /* Solid dark */
-            padding: 1rem;
-            border-radius: 4px;
-        }
+        .case-study-main { overflow-x: hidden; }
+        .case-study-main p { position: static !important; display: block !important; margin-top: 0 !important; margin-bottom: 1.25rem !important; line-height: 1.7 !important; height: auto !important; opacity: 1 !important; z-index: 1; width: 100% !important; max-width: 100% !important; white-space: normal !important; word-wrap: break-word !important; overflow-wrap: break-word !important; }
+        .case-study-main pre { background-color: #2D2D2D; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; margin: 1.5rem 0; white-space: pre; }
+        .case-study-main code { font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; }
+        .case-study-main p > code, .case-study-main li > code { background-color: #333333; color: #AAAAAA; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85rem; white-space: nowrap; }
     </style>
-    </head>
+</head>
 <body class="case-study-page">
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
@@ -96,9 +36,8 @@
                 </a>
                 <nav class="sidebar-nav">
                     <ul>
-                         <li><a href="index.html#work" title="Work"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><span>Work</span></a></li>
+                        <li><a href="index.html#work" title="Work"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><span>Work</span></a></li>
                         <li><a href="index.html#profile" title="Profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></a></li>
-                        <li><a href="index.html#blog" title="Blog"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>Blog</span></a></li>
                         <li><a href="index.html#contact" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><span>Contact</span></a></li>
                     </ul>
                 </nav>
@@ -113,79 +52,60 @@
 
         <main class="main-content">
             <section class="case-study-header">
-    <div class="container">
-        <a href="index.html#work" class="back-link">&larr; Back to all projects</a>
-        <h1>The "Hello World" of AI is a Parlor Trick. So I Built a Real One.</h1>
-        <p class="case-study-subtitle">A 0-to-1 deep dive into 'whatsgood', my live, stateful AI news analyst.</p>
-         <a href="https://whatsgood.abhay-arora.com" target="_blank" class="btn case-study-main-cta">View Live Website</a>
-    </div>
-</section>
+                <div class="container">
+                    <a href="index.html#work" class="back-link">&larr; Back to all projects</a>
+                    <h1>What's Good: A Live AI News Analyst</h1>
+                    <p class="case-study-subtitle">Architecting a stateful, distributed RAG application deployed on AWS.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://www.linkedin.com/posts/abhay-arora-digital_aisystems-mlops-ai-activity-7390442218207133697-ctET?utm_source=share&utm_medium=member_desktop&rcm=ACoAADK99ysB4TwEV7XQ23JKl7BtIrJd3e6aMok" target="_blank" class="btn case-study-main-cta">View Launch Post</a>
+                        <a href="https://github.com/SPAbhay/whatsgood-v2-api" target="_blank" class="btn btn-outline">View Source Code</a>
+                    </div>
+                </div>
+            </section>
 
             <section class="case-study-content">
                 <div class="container case-study-container">
                     <div class="case-study-sidebar">
                         <h4>Project Details</h4>
                         <ul>
-                            <li><strong>Service:</strong> AI Systems Design</li>
+                            <li><strong>Type:</strong> Personal 0-to-1 Build</li>
                             <li><strong>Status:</strong> Live (10-User Beta)</li>
-                            <li><strong>Type:</strong>Personal 0-to-1 Build</li>
+                            <li><strong>Focus Areas:</strong></li>
+                            <li class="tech-list">System Architecture, MLOps, RAG, CI/CD</li>
                         </ul>
                          <h4>Core Technologies</h4>
                         <ul>
-                            <li><strong>AI/ML:</strong> <span>Groq (Llama 3.1), RAG, Vector Search, Cross-Encoders, Sentence-Transformers</span></li>
-            <li><strong>Cloud/Infra:</strong> <span>AWS (ECS, Fargate, Lambda, API Gateway, ALB, EventBridge), Netlify</span></li>
-            <li><strong>Data/Backend:</strong> <span>Pinecone, Supabase (PostgreSQL), Python (FastAPI, newspaper3k)</span></li>
-            <li><strong>CI/CD:</strong> <span>GitHub Actions, OIDC Connect, Docker, QEMU, Buildx</span></li>
+                            <li class="tech-list">Groq (Llama 3.1), Pinecone, Cross-Encoders</li>
+                            <li class="tech-list">AWS (ECS, Fargate, Lambda, API Gateway, EventBridge)</li>
+                            <li class="tech-list">Supabase (PostgreSQL), FastAPI</li>
+                            <li class="tech-list">Docker, GitHub Actions, QEMU</li>
                         </ul>
                     </div>
                     <div class="case-study-main">
-                        <h3>The Premise: The Parlor Trick Problem</h3>
-                        <p>Picture this: You've built your first RAG (Retrieval-Augmented Generation) app. It takes a user's query—say, "AI and healthcare"—and finds 10 "similar" articles from a vector database. You pat yourself on the back. It’s the "Hello World" of modern AI.</p>
-                        <p>The problem? It’s just a parlor trick. And let's be honest, it's a boring one.</p>
-                        <p>It's a "dumb" search engine disguised as "AI." It has no memory; it will happily recommend the exact same article you disliked 10 seconds ago. And it has no concept of time; it will proudly serve you a "breaking news" story from six months ago with a 0.99 similarity score.</p>
-                        <p>To a user, this isn't just stale; it's wrong. And as the builder, it just felt lazy.</p>
-                        <p>This realization was the starting point for whatsgood: a 0-to-1 build of a stateful, real-time, AI-powered news analyst. I wanted to build something with a memory, something that learns from every swipe, and something that reasons like an analyst, not a search index.</p>
-                        <p>Me being me, I thought, "How hard could it be to build a real one?" <strong>(Spoiler: It was hard.)</strong></p>
-                        <p>So, I'm pulling back the curtain. This post is the story of that journey—a deep dive into the system architecture, the product decisions, and the "war stories" from the trenches of building a production-ready AI system from scratch.</p>
-                        
-                        <h3>The Core Architectural Choice: Monolith Trap vs. Microservices</h3>
-                        <p>Let's talk about the 0-to-1 trap. That first instinct to build one giant <code>main.py</code> file. It's fast, it's simple, and it's a trap I was determined to avoid.</p>
-                        <p>What happens when your (hourly) data scraper crashes? It takes down your (24/7) recommendation API. What happens when you need to update a single line of text in the user-service? You have to re-deploy the entire 2GB AI model. It's inefficient, fragile, and unscalable.</p>
-                        <p>So, we tore the monolith apart before it was even built and designed a distributed, microservice architecture from day one.</p>
-                        <div class="image-placeholder">
-  <img src="WhatsGood Arch Diag.png" alt="WhatsGood Architecture Diagram" style="max-width: 100%; height: auto;">
-</div>
-                        <p class="caption">A high-level system architecture diagram. User (Netlify) -> AWS API Gateway. The Gateway routes to: user-service (Lambda), interaction-service (Lambda), and recommendation-service (ALB -> ECS on Fargate). A separate EventBridge trigger points to the ingestion-service (Lambda), which writes to Pinecone & Supabase. The ECS service reads from this.</p>
-                        <p>This design immediately slammed me into a new, more interesting problem: the "Always On" vs. "On-Demand" Cost Dilemma.</p>
-                        <ul>
-                            <li>Our <strong>recommendation-service</strong> (the AI "brain") needs to be "always on." It has to keep models (Bi-Encoder, Cross-Encoder) loaded in memory, ready to serve a recommendation in &lt; 1 second.</li>
-                            <li>Our <strong>ingestion-service</strong> (the data scraper) needs to be "off" 99% of the time. It runs for 5 minutes every 2 days.</li>
-                            <li>Our <strong>user-service</strong> (for login/persona) is light and stateless.</li>
-                        </ul>
-                        <p>Running all of these on the same platform is either slow (if using Lambda for the AI, with its 10-second INIT timeout) or wildly expensive (if using an "always on" ECS container for the scraper).</p>
-                        <p>The fix was simple: We didn't choose one platform; we chose the right platform for each job.</p>
-                        <ul>
-                            <li><strong>The AI Core (Stateful, Heavy):</strong> Deployed to AWS ECS on Fargate. It's an "always on" container, models in memory, sitting behind an Application Load Balancer for high availability.</li>
-                            <li><strong>The Other Services (Stateless, Light):</strong> The user-service, interaction-service, and ingestion-service were all deployed as AWS Lambda functions. They scale to zero, cost nothing when idle, and are perfect for event-driven tasks.</li>
-                        </ul>
-                        <p>This is core MLOps: using abstraction to get the best performance for the lowest cost.</p>
+                        <h3>The Engineering Goal</h3>
+                        <p>Most basic Retrieval-Augmented Generation (RAG) applications function as stateless semantic search engines. They lack memory and temporal awareness—happily recommending a six-month-old article purely based on vector similarity. My goal was to build a stateful AI news analyst that dynamically adjusts to user interactions in real-time, deployed via a scalable microservices architecture.</p>
 
-                        <h3>Building an AI With a Memory (And an Opinion)</h3>
-                        <p>This is the fun part. This is where we actually fight the "dumb search" problem. The recommendation-service on ECS isn't just a vector search. It's a five-stage pipeline that runs in real-time, on demand.</p>
+                        <h3>System Architecture: Distributed from Day One</h3>
+                        <p>To balance compute performance with operational costs, I avoided a monolithic design. Instead, I routed workloads to the appropriate AWS compute layer:</p>
+                        <ul>
+                            <li><strong>Stateful AI Core (Always On):</strong> The recommendation service, which holds the Bi-Encoder and Cross-Encoder models in memory, runs on AWS ECS (Fargate) behind an Application Load Balancer to guarantee sub-second response times.</li>
+                            <li><strong>Stateless Services (Serverless):</strong> The user interaction service and the background data ingestion service run on AWS Lambda. Migrating the scraping and ingestion layer to an event-driven Serverless architecture reduced compute costs by 60%.</li>
+                        </ul>
+
+                        <div class="image-placeholder">
+                            <img src="WhatsGood Arch Diag.png" alt="WhatsGood Architecture Diagram" style="max-width: 100%; height: auto;">
+                        </div>
+
+                        <h3>Core Mechanics</h3>
                         
-                        <h4>1. The System Had Amnesia</h4>
-                        <p>Our first system had the memory of a goldfish. A user could "like" an amazing article, refresh, and get the exact same recommendations. It was stateless, which is a nice word for 'dumb'.</p>
-                        <p><strong>The Fix: The "Living" Persona.</strong></p>
-                        <p>We killed the idea of a "static" persona. The user's persona is now a living vector, created on the fly. When a user requests recommendations, we call <code>get_dynamic_query_vector</code>.</p>
-                        <p>This function fetches the user's base persona, fetches their 10 most recent likes/dislikes, pulls all the corresponding vectors, and then performs this vector arithmetic:</p>
-<pre><code class="language-python">
-# From: services/recommendation-service/main.py
+                        <h4>1. Dynamic Persona Memory via Vector Interpolation</h4>
+                        <p>To eliminate the "stateless amnesia" problem, user profiles are not stored as static text. I implemented real-time vector interpolation using NumPy. When a user likes or dislikes an article, the system fetches their base vector and the recent interaction vectors, then performs vector arithmetic to dynamically shift their persona. This achieves highly personalized context with an 850ms p95 retrieval latency.</p>
+
+<pre><code class="language-python"># From: services/recommendation-service/main.py
 async def get_dynamic_query_vector(user_id: str) -> np.ndarray:
-    # ... (Code to fetch base_vector and interaction data) ...
-    
-    # 4. Vector Arithmetic
+    # ... (Fetch base_vector and interaction data) ...
     dynamic_vector = base_vector
-    weight = 0.2  # How much each interaction "pulls" the vector
+    weight = 0.2  # Interaction pull weight
 
     for item in interaction_response.data:
         article_id = item['article_id']
@@ -195,29 +115,17 @@ async def get_dynamic_query_vector(user_id: str) -> np.ndarray:
             article_vector = np.array(fetched_vectors[article_id])
             
             if interaction_type == 'like':
-                # Pull the vector TOWARDS the liked item
                 dynamic_vector = dynamic_vector + weight * (article_vector - dynamic_vector)
             elif interaction_type == 'dislike':
-                # Push the vector AWAY from the disliked item
                 dynamic_vector = dynamic_vector - weight * (article_vector - dynamic_vector)
     
-    # Return the new, normalized, "living" vector
-    return dynamic_vector / np.linalg.norm(dynamic_vector)
-</code></pre>
-                        <p>The system now reacts in real-time. Liking an article about "MLOps" will immediately surface more articles on deployment and CI/CD.</p>
+    return dynamic_vector / np.linalg.norm(dynamic_vector)</code></pre>
 
-                        <h4>2. Your AI is Recommending Last Week's "Breaking" News</h4>
-                        <p>A vector search will happily return a 6-month-old article with a 0.99 score. It's similar, but it's not relevant. And for a news app, 'not relevant' means 'useless'.</p>
-                        <p><strong>The Fix: Multi-Stage Re-Ranking.</strong></p>
-                        <p>Simple retrieval isn't enough. We retrieve 50+ candidates from Pinecone, then run them through a second, more computationally expensive re-ranking step. The <code>final_score</code> is a weighted, tunable blend of three different scores.</p>
-                        <p>This is the exact code from the <code>get_recommendations</code> endpoint:</p>
-<pre><code class="language-python">
-# From: services/recommendation-service/main.py
+                        <h4>2. Multi-Stage Re-Ranking</h4>
+                        <p>To ensure temporal relevance alongside semantic accuracy, I built a multi-stage retrieval pipeline. The system pulls 50 initial candidates from Pinecone and re-ranks them using a more accurate Cross-Encoder combined with a time-decay freshness score.</p>
+
+<pre><code class="language-python"># From: services/recommendation-service/main.py
 # ... (Inside Stage 4: Re-rank) ...
-ranked_list = []
-for i, article in enumerate(articles_response.data):
-    article_id = article['id']
-
     # 1. Pinecone's "fast" vector score
     p_score = pinecone_scores.get(article_id, 0.0)
     
@@ -231,312 +139,104 @@ for i, article in enumerate(articles_response.data):
     # The final, weighted formula
     final_score = (
         (0.60 * c_score_normalized) +  # 60% weight to accuracy
-        (0.30 * p_score) +            # 30% weight to vector similarity
-        (0.10 * f_score)              # 10% weight to freshness
-    )
+        (0.30 * p_score) +             # 30% weight to vector similarity
+        (0.10 * f_score)               # 10% weight to freshness
+    )</code></pre>
 
-    article['final_score'] = final_score
-    ranked_list.append(article)
-# Sort by the new score
-ranked_list.sort(key=lambda x: x['final_score'], reverse=True)
-final_top_5_articles = ranked_list[:5]
-</code></pre>
-                        <p>This lets us abstract "relevance" into a simple, tunable equation. Suddenly, we're not just searching; we're curating.</p>
+                        <h4>3. LLM Curation & Structured Output</h4>
+                        <p>Finally, the full text of the top 5 re-ranked articles is passed to Llama-3.1 (via Groq). To ensure the frontend didn't crash from non-deterministic text generation, I had to enforce strict structured outputs. I prompted the model to act as an analyst and mandated that it return a strict JSON array, mapping the reasoning traces directly to the article IDs.</p>
 
-                        <h4>3. From "Dumb List" to "Smart Conversation"</h4>
-                        <p>Even with all this, at the end of the day, we were still just showing a list of 5 articles. We're right back to the parlor trick!</p>
-                        <p><strong>The Fix: The "Crisp Curator" Prompt.</strong></p>
-                        <p>This was the final piece. We retrieve the Top 5 re-ranked articles, but then we feed the full text of all five to Groq (Llama 3.1 8B).</p>
-                        <p>We don't ask it to "summarize." We ask it to act as an analyst. This is the exact prompt:</p>
-<pre><code class="language-python">
-# From: services/recommendation-service/main.py
+                        <pre><code class="language-python"># From: services/recommendation-service/main.py
+                        system_prompt = """You are an expert news analyst. 
+Read the context and write a single, sharp hook for each article.
 
-system_prompt = "You are an expert news editor and analyst. Your job is to read a full article and write a single, sharp, insightful summary (the 'hook') that gets straight to the core of the story. You write directly to a smart reader, without fluff or robotic phrases."
+CRITICAL: Return your response as a single, valid JSON array.
+The JSON array must contain exactly 5 objects. 
+Each object must have ONLY these keys: "id", "title", "summary", "reason".
+Do not output any markdown formatting or conversational text outside the JSON."""</code></pre>
 
-human_prompt = f"""
-My user's persona is: "{user_persona_text}"
+                        <h3>Engineering Challenges & Solutions</h3>
+                        <p>Deploying this system to production surfaced several MLOps bottlenecks:</p>
 
-Based *only* on the user's persona and the 5 articles provided below, do the following:
-
-1.  Read the **Full Text Snippet** for each article to understand its core argument, not just its topic.
-2.  Write a single, concise "summary" sentence (15-30 words). This sentence must be a powerful hook that. captures the **most important takeaway, key statistic, or surprising insight** from the text.
-3.  **DO NOT** just describe what the article is "about" (e.g., "This article is about...").
-4.  **DO NOT** mention the user or their persona in the summary. Your tone should be smart, neutral, and authoritative.
-5.  Write a "reason" sentence (1-2 sentences). This is your internal note explaining the *specific link* between the article's core takeaway and the user's persona.
-6.  Return your response as a single, valid JSON array.
-7.  The JSON array must contain 5 objects. Each object must have *only* these keys: "id", "title", "summary", "reason".
-8.  Use the exact "id" and "title" provided for each article in the context.
-
-**Examples of desired crisp summary style:**
-* *Article about Google/Wiz:* "Google is reportedly in talks to acquire cybersecurity startup Wiz for $23 billion, marking its largest acquisition ever."
-* *Article about crypto volume:* "Global crypto trading volume is projected to hit $108 trillion in 2024, a 90% increase from 2022 levels, with Europe leading the transactions."
-
-**Here is the context for the 5 articles you need to process:**{context_block}
-"""
-</code></pre>
-                        <p>And that was the final piece. We abstracted the "dumb list" into a "smart conversation." The LLM doesn't just summarize; it reasons and explains why each article matters, generating the summary and reason fields for the UI.</p>
-
-                        <h3>The MLOps War Stories (aka The Hard Problems)</h3>
-                        <p>A clean architecture diagram is a beautiful lie. It hides the brutal, hair-pulling, "why-is-this-not-working-at-2-AM" moments. The real, senior-level engineering is in the "backbone"—the MLOps foundation that makes this whole thing run.</p>
-                        <p>Here are the war stories.</p>
                         <details class="accordion-item">
-                            <summary>War Story #1: The "Noisy Neighbor" & The 17-Second Latency Trap</summary>
+                            <summary>Fargate CPU Throttling & Latency Optimization</summary>
                             <div class="accordion-content">
-
-                            <p><strong>The Challenge:</strong><br>
-                            The system was live. It worked. But it felt… sluggish. When I stress-tested it, the first few requests were snappy (~2.5s), but by the 5th concurrent request, latency spiked to a painful <strong>17 seconds</strong>.
-                            </p>
-
-                            <p><strong>The Diagnosis:</strong><br>
-                            I suspected the Cross-Encoder was heavy, but 17 seconds? CloudWatch revealed the real culprit: <strong>CPU throttling</strong> on AWS Fargate burstable instances.
-                            </p>
-
-                            <p>
-                            The first few requests burned through CPU credits. After that, AWS throttled the container to baseline performance. Worse, my pipeline was sequential—waiting for summary 1, then summary 2—holding CPU while doing nothing but waiting on network I/O.
-                            </p>
-
-                            <p><strong>The Solution: Async Fan-Out</strong></p>
-                            <ol>
-                            <li><strong>Algorithmic Fix:</strong> Reduced re-ranking window (<code>top_k</code>) from 50 → 15, cutting compute by ~70%.</li>
-                            <li><strong>I/O Fix:</strong> Refactored summary generation to <strong>async parallel execution</strong> using <code>asyncio.gather</code>.</li>
-                            </ol>
-
-                            <p><strong>The Result:</strong></p>
-                            <ul>
-                            <li><strong>Latency:</strong> Dropped from <strong>17s → ~6s</strong> end-to-end</li>
-                            <li><strong>Efficiency:</strong> Shifted from CPU-bound to I/O-bound, enabling far higher concurrency on the same hardware</li>
-                            </ul>
-
+                                <p><strong>Problem:</strong> Initial stress testing revealed that concurrent requests exhausted AWS Fargate CPU credits, causing p95 latency to spike to an unacceptable 17 seconds.</p>
+                                <p><strong>Solution:</strong> The bottleneck was sequential network I/O waiting on LLM summary generation. I refactored the pipeline to use asynchronous fan-out execution (<code>asyncio.gather</code>) and tuned the re-ranking window. This shifted the workload from CPU-bound to I/O-bound, dropping end-to-end latency from 17s to 6s and resolving the throttling issue entirely.</p>
                             </div>
-                            </details>
+                        </details>
+
                         <details class="accordion-item">
-                            <summary>War Story #2: The 10-Second "Init" Timeout Wall</summary>
+                            <summary>Lambda Initialization Timeouts</summary>
                             <div class="accordion-content">
-                                <p><strong>The Challenge:</strong> Our ingestion-service Lambda kept failing. And failing. And failing. I'm digging into CloudWatch logs and I see the dreaded message:</p>
-                                <blockquote>INIT_REPORT Init Duration: 9999.49 ms Status: timeout</blockquote>
-                                <p><strong>The Reason:</strong> AWS Lambda has a 10-second hard limit to "thaw" a container on a cold start. Our Docker image, with the sentence-transformers model baked in, was over 1GB. Trying to "unzip" and load a 1GB container in 10 seconds is physically impossible.</p>
-                                <p><strong>My Solution:</strong> The Lazy-Loading Handler. Instead of loading the model when the container boots, we load it <code>inside</code> the handler function on the first invocation. We moved the model out of the Docker image and attached it via EFS to the Lambda's <code>/tmp</code> dir (which is what <code>model_path</code> points to). This way, we trade a 10-second hard failure for a 30-second one-time-only cold start. A trade I will make any day of the week.</p>
-<pre><code class="language-python">
-# From: services/ingestion-service/handler.py
-import os
-# ... other imports
-from sentence_transformers import SentenceTransformer
-
-# --- MODIFICATION ---
-# Clients are initialized to None. The 'init' phase is now < 1ms.
-supabase: Client = None
-pinecone_index = None
-bi_encoder = None
-model_path = os.path.join(os.path.dirname(__file__), 'model')
-# --- END MODIFICATION ---
-
-def ingest(event, context):
-    """
-    This is the main function that AWS Lambda will call.
-    """
-    
-    # --- MODIFICATION ---
-    # Use 'global' to access and initialize our clients ONCE.
-    global supabase, pinecone_index, bi_encoder
-
-    # This 'if' block only runs on a COLD start
-    if supabase is None:
-        print("Handler: Cold start. Initializing Supabase client...")
-        url: str = os.environ.get("SUPABASE_URL")
-        key: str = os.environ.get("SUPABASE_ANON_KEY")
-        supabase = create_client(url, key)
-
-    if pinecone_index is None:
-        print("Handler: Cold start. Initializing Pinecone connection...")
-        pc = Pinecone(api_key=os.environ.get("PINECONE_API_KEY"))
-        pinecone_index = pc.Index("whats-good-v2")
-    
-    if bi_encoder is None:
-        print("Handler: Cold start. Loading bi-encoder model...")
-        # This is the slow step (~30 seconds)
-        bi_encoder = SentenceTransformer(model_path)
-        print("Handler: Bi-encoder model loaded.")
-    else:
-        print("Handler: Warm start. All clients and model already loaded.")
-    # --- END MODIFICATION ---
-
-    print("Starting ingestion cycle...")
-    # ... (rest of the scraping logic) ...
-</code></pre>
+                                <p><strong>Problem:</strong> The ingestion service on AWS Lambda failed due to the hard 10-second container initialization timeout, as the 1GB sentence-transformer model could not be loaded into memory fast enough during a cold start.</p>
+                                <p><strong>Solution:</strong> I moved the model payload out of the Docker image and attached it via EFS to the Lambda's <code>/tmp</code> directory. I then implemented a lazy-loading handler that initializes the model inside the execution function on the first invocation, successfully bypassing the init timeout limit.</p>
                             </div>
                         </details>
                         
                         <details class="accordion-item">
-                            <summary>War Story #3: The "It Works On My (M3) Mac" Nightmare</summary>
+                            <summary>Cross-Platform Architecture Mismatches</summary>
                             <div class="accordion-content">
-                                <p><strong>The Challenge:</strong> This one was a killer. I mean, this one really hurt. I built all my <code>arm64</code> Docker images on my Mac M3. The GitHub Actions runner (an <code>x86_64</code> machine) built them just fine. The deploy pipeline was green. But the <code>arm64</code> Lambda function would crash instantly. Just... poof. Gone.</p>
-                                <p><strong>The Reason:</strong> I was building an <code>arm64</code> image on an <code>arm64</code> machine (my Mac). The GitHub runner was <em>emulating</em> an <code>arm64</code> build on an <code>x86</code> machine. But it wasn't a true cross-compilation. The resulting image was subtly broken.</p>
-                                <p><strong>My Solution:</strong> We had to stop building for <em>my</em> machine and start cross-compiling for the <em>target</em> machine. We used QEMU (an emulator) and Docker Buildx inside the CI/CD pipeline to force the <code>x86</code> runner to build a true <code>arm64</code> image.</p>
-<pre><code class="language-yaml">
-# From: .github/workflows/deploy-ingestion-service.yml
-name: Deploy Ingestion Service to Lambda
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'services/ingestion-service/**' # Only deploy this service
-env:
-  AWS_REGION: us-east-1
-  ECR_REPOSITORY: whatsgood/ingestion-service
-  LAMBDA_FUNCTION_NAME: whatsgood-ingestion-service
-permissions:
-  id-token: write   # Required for OIDC
-  contents: read
-jobs:
-  deploy:
-    name: Build, Push, and Deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # --- THE FIX STARTS HERE ---
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      # --- END QEMU/BUILDX SETUP ---
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::[YOUR_ACCOUNT_ID]:role/github-actions-whatsgood-deploy-role
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: ./services/ingestion-service
-          push: true
-          tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-          # --- THIS IS THE MAGIC LINE ---
-          platforms: linux/arm64 # Force the build for ARM64
-          provenance: false
-
-      - name: Update Lambda function
-        run: |
-          aws lambda update-function-code \
-            --function-name ${{ env.LAMBDA_FUNCTION_NAME }} \
-            --image-uri ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ github.sha }}
-</code></pre>
+                                <p><strong>Problem:</strong> Building ARM64 Docker images on a local ARM machine (M3 Mac) using standard GitHub Action runners (x86_64) resulted in subtle emulation failures, causing instant container crashes upon deployment to AWS.</p>
+                                <p><strong>Solution:</strong> Engineered a dedicated QEMU-based CI/CD pipeline using Docker Buildx within GitHub Actions to force true cross-compilation. This ensured stable, native ARM64 image generation for the production environment.</p>
                             </div>
                         </details>
-                        
+
                         <details class="accordion-item">
-                            <summary>War Story #4: The API's Identity Crisis</summary>
+                            <summary>The API Identity Crisis</summary>
                             <div class="accordion-content">
-                                <p><strong>The Challenge:</strong> My first instinct was to use FastAPI for all my Python services, even in Lambda. I'd use the <code>mangum</code> adapter to translate AWS events into HTTP. But for the simple services, it was just... deaf. It was adding 100 lines of boilerplate, new dependencies, and a new failure point for literally no reason. Why run a whole web server just to parse a JSON and call a database?</p>
-                                <p><strong>My Solution:</strong> The Ultimate Abstraction is Removing the Abstraction. I threw out FastAPI and <code>mangum</code> for the simple services. I rewrote them as 100% pure, 30-line Python handlers. The <code>interaction-service</code> is the perfect example. It has zero dependencies outside the standard library and <code>supabase-client</code>.</p>
-                                <p>This is the entire file. It's clean, fast, cheap, and impossible to break.</p>
-<pre><code class="language-python">
-# From: services/interaction-service/main.py
-import os
-import json
-from supabase import create_client, Client
-
-# --- Clients are loaded ONCE during the cold start ---
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_ANON_KEY")
-supabase: Client = create_client(url, key)
-
-def handler(event, context):
-    """
-    This is the new handler function that API Gateway will call.
-    """
-    try:
-        # 1. Get the request data from the 'body'
-        body = json.loads(event.get('body', '{}'))
-
-        # 2. Your original Supabase logic
-        response = supabase.table('user_interactions').insert(body).execute()
-
-        if not response.data:
-            raise Exception("Failed to insert interaction.")
-
-        # 3. Return a special dictionary that API Gateway understands
-        return {
-            'statusCode': 200,
-            'headers': {
-                'Access-control-allow-origin': '*', # Required for CORS
-                'Access-control-allow-headers': 'Content-Type',
-                'Access-control-allow-methods': 'POST,OPTIONS'
-            },
-            'body': json.dumps({
-                "status": "ok",
-                "service": "interaction-service",
-                "logged_interaction": response.data[0]
-            })
-        }
-
-    except Exception as e:
-        return {
-            'statusCode': 500,
-            'headers': { 'Access-control-allow-origin': '*' }, # CORS
-            'body': json.dumps({"message": str(e)})
-        }
-</code></pre>
-                                <p>This, to me, is mature engineering. It's boring, and that's what makes it brilliant. It just works.</p>
+                                <p><strong>Problem:</strong> Initially, I used FastAPI wrapped in <code>mangum</code> for all my Serverless Python services. For simple ingestion or interaction-logging endpoints, the FastAPI overhead was adding 100+ lines of boilerplate, unnecessary dependencies, and increasing the cold-start time for no tangible benefit.</p>
+                                <p><strong>Solution:</strong> The ultimate abstraction is removing the abstraction. I ripped FastAPI out of the lightweight microservices and rewrote them as pure, 30-line native AWS Lambda handlers. By manually parsing the JSON and returning the exact HTTP headers API Gateway expects, I drastically reduced the package size, cold-start latency, and point-of-failure surface area.</p>
                             </div>
                         </details>
 
-                        <h3>Final Reflection</h3>
-                        <p>So, yeah. The frontend "Tinder for News" UI? That was the easy part. Building <code>whatsgood</code> was an exercise in end-to-end systems design. The real work was building the... well, the system.</p>
-                        <p>I solved the 10-second INIT timeout. I solved the M3 Mac cross-compilation nightmare. I solved the "API Identity Crisis" by choosing simplicity over dogma. And I built a fully keyless, secure CI/CD pipeline using OIDC—something many large companies still haven't adopted.</p>
-                        <p>The final system isn't just a "project." It's a scalable, secure, and fully automated platform. It's an AI analyst that learns from every interaction, and most importantly, it's a foundation I can build on.</p>
-                        <p>That's the difference between a parlor trick and a product. And I know which one I'd rather build.</p>
                     </div>
                 </div>
             </section>
-             <footer>
+            <footer>
                 <div class="container">
-                    <p>&copy; 2025 Abhay Arora. All rights reserved.</p>
+                    <p>&copy; 2026 Abhay Arora. All rights reserved.</p>
                 </div>
             </footer>
         </main>
-
-        <aside class="right-sidebar">
-             <div class="social-links">
-                <a href="https://linkedin.com/in/abhay-arora-digital" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
-                <a href="https://github.com/SPAbhay" target="_blank" title="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-                <a href="[LEETCODE PROFILE LINK]" target="_blank" title="LeetCode"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 5.844a1.38 1.38 0 0 0-.438.961v10.392a1.38 1.38 0 0 0 .438.961l5.405 5.405a1.373 1.373 0 0 0 .961.438h7.034a1.373 1.373 0 0 0 .961-.438l5.405-5.405a1.38 1.38 0 0 0 .438-.961V5.844a1.38 1.38 0 0 0-.438-.961L21.478.438a1.374 1.374 0 0 0-.961-.438h-7.034zM2 12h3.5v3.5H2V12zm6.5 0H12v3.5H8.5V12zM2 17.5h3.5V21H2v-3.5zm6.5 0H12V21H8.5v-3.5z"/></svg></a>
-            </div>
-        </aside>
     </div>
 
     <script>
-        // All original JS is preserved here for functionality
         function initPage() {
             const mainContent = document.querySelector('.main-content');
+            
+            // 1. Progress Bar Logic
             mainContent.addEventListener('scroll', () => {
                 const scrollTop = mainContent.scrollTop;
                 const scrollHeight = mainContent.scrollHeight - mainContent.clientHeight;
                 const scrolled = (scrollTop / scrollHeight) * 100;
                 document.getElementById("scrollProgressBar").style.width = scrolled + "%";
             });
+
+            // 2. Theme Toggle Logic (Matches Homepage)
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
             const currentTheme = localStorage.getItem('theme');
-            if (currentTheme) { body.classList.add(currentTheme); } 
-            else if (!window.matchMedia || window.matchMedia('(prefers-color-scheme: dark)').matches) { body.classList.remove('light-theme'); } 
-            else { body.classList.add('light-theme'); }
+            
+            if (currentTheme) {
+                body.classList.add(currentTheme);
+            } else if (!window.matchMedia || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.classList.remove('light-theme');
+            } else {
+                body.classList.add('light-theme');
+            }
+            
             themeToggle.addEventListener('click', () => {
                 body.classList.toggle('light-theme');
                 let theme = body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
                 localStorage.setItem('theme', theme);
             });
+
+            // 3. Custom Cursor Logic
             const cursorDot = document.querySelector('.cursor-dot');
             const cursorOutline = document.querySelector('.cursor-outline');
             const interactiveElements = document.querySelectorAll('a, button, details, summary');
+            
             window.addEventListener('mousemove', (e) => {
                 const posX = e.clientX;
                 const posY = e.clientY;
@@ -544,86 +244,16 @@ def handler(event, context):
                 cursorDot.style.top = `${posY}px`;
                 cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
             });
+            
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseover', () => cursorOutline.classList.add('grow'));
                 el.addEventListener('mouseleave', () => cursorOutline.classList.remove('grow'));
             });
         }
-        function startAnimations() {
-            const socialLinks = document.querySelectorAll('.right-sidebar .social-links a');
-            socialLinks.forEach(link => {
-                const icon = link.querySelector('svg');
-                link.addEventListener('mousemove', (e) => {
-                    const { left, top, width, height } = link.getBoundingClientRect();
-                    const centerX = left + width / 2;
-                    const centerY = top + height / 2;
-                    const deltaX = e.clientX - centerX;
-                    const deltaY = e.clientY - centerY;
-                    const moveX = -deltaX * 0.5;
-                    const moveY = -deltaY * 0.5;
-                    gsap.to(icon, { x: moveX, y: moveY, duration: 0.6, ease: "power3.out" });
-                });
-                link.addEventListener('mouseleave', () => {
-                    gsap.to(icon, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" });
-                });
-            });
-        }
-        
-        /* // THIS ENTIRE FUNCTION IS COMMENTED OUT TO REMOVE THE BACKGROUND EFFECT
-        
-        function initGenerativeBackground() {
-            const canvas = document.getElementById('generative-background');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let width, height, dots;
-            const mouse = { x: null, y: null, radius: 150 };
-            function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-                dots = [];
-                const dotSpacing = 40;
-                const columns = Math.floor(width / dotSpacing);
-                const rows = Math.floor(height / dotSpacing);
-                for (let x = 0; x < columns; x++) {
-                    for (let y = 0; y < rows; y++) {
-                        dots.push({ baseX: (x * dotSpacing) + (dotSpacing / 2), baseY: (y * dotSpacing) + (dotSpacing / 2), x: (x * dotSpacing) + (dotSpacing / 2), y: (y * dotSpacing) + (dotSpacing / 2), density: (Math.random() * 30) + 1 });
-                    }
-                }
-            }
-            window.addEventListener('resize', resize);
-            window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-                const dotColor = document.body.classList.contains('light-theme') ? 'rgba(36, 41, 47, 0.2)' : 'rgba(201, 209, 217, 0.2)';
-                ctx.fillStyle = dotColor;
-                dots.forEach(dot => {
-                    let dx = mouse.x - dot.x; let dy = mouse.y - dot.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
-                    let maxDistance = mouse.radius;
-                    let force = (maxDistance - distance) / maxDistance;
-                    let directionX = forceDirectionX * force * dot.density;
-                    let directionY = forceDirectionY * force * dot.density;
-                    if (distance < mouse.radius) {
-                        dot.x -= directionX; dot.y -= directionY;
-                    } else {
-                        if (dot.x !== dot.baseX) { dot.x -= (dot.x - dot.baseX) / 10; }
-                        if (dot.y !== dot.baseY) { dot.y -= (dot.y - dot.baseY) / 10; }
-                    }
-                    ctx.beginPath(); ctx.arc(dot.x, dot.y, 1.5, 0, Math.PI * 2); ctx.fill();
-                });
-                requestAnimationFrame(animate);
-            }
-            resize();
-            animate();
-        }
-        */
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof gsap === 'undefined') { console.error("GSAP not loaded!"); return; }
             initPage();
-            startAnimations();
-            // initGenerativeBackground(); // BACKGROUND SCRIPT CALL REMOVED
         });
     </script>
 </body>

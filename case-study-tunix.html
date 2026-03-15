@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en" class="case-study-page-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tunix: Reasoning Model Alignment | Abhay Arora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .case-study-main { overflow-x: hidden; }
+        .case-study-main p { position: static !important; display: block !important; margin-top: 0 !important; margin-bottom: 1.25rem !important; line-height: 1.7 !important; height: auto !important; opacity: 1 !important; z-index: 1; width: 100% !important; max-width: 100% !important; white-space: normal !important; word-wrap: break-word !important; overflow-wrap: break-word !important; }
+        .case-study-main pre { background-color: #2D2D2D; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; margin: 1.5rem 0; white-space: pre; }
+        .case-study-main code { font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; }
+        .case-study-main p > code, .case-study-main li > code { background-color: #333333; color: #AAAAAA; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85rem; white-space: nowrap; }
+    </style>
+</head>
+<body class="case-study-page">
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="scrollProgressBar"></div>
+    </div>
+
+    <div class="portfolio-wrapper">
+        <aside class="left-sidebar">
+            <div class="sidebar-content">
+                <a href="index.html" class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 100 100"><rect class="logo-bg" width="100" height="100" rx="20"/><text class="logo-text" x="50" y="68" font-size="50" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="bold">A</text></svg>
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="index.html#work" title="Work"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><span>Work</span></a></li>
+                        <li><a href="index.html#profile" title="Profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></a></li>
+                        <li><a href="index.html#contact" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><span>Contact</span></a></li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="case-study-header">
+                <div class="container">
+                    <a href="index.html#work" class="back-link">&larr; Back to all projects</a>
+                    <h1>Thinking in Tokens: Distilling Chain-of-Thought</h1>
+                    <p class="case-study-subtitle">How I fine-tuned Gemma-3-1B to explicitly structure reasoning traces using GRPO on a single Kaggle TPU.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                        <a href="https://www.youtube.com/watch?v=FOkQITQHNHQ" target="_blank" class="btn case-study-main-cta">Watch Video Explanation</a>
+                        <a href="https://www.kaggle.com/competitions/google-tunix-hackathon/writeups/distilling-chain-of-thought-with-tunix" target="_blank" class="btn btn-outline">Read Kaggle Writeup</a>
+                        <a href="https://kaggle.com/models/theabhay27/gemma-3-1b-reasoning-grpo" target="_blank" class="btn btn-outline">View Model</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="case-study-content">
+                <div class="container case-study-container">
+                    <div class="case-study-sidebar">
+                        <h4>Project Details</h4>
+                        <ul>
+                            <li><strong>Context:</strong> Google Tunix Hackathon</li>
+                            <li><strong>Status:</strong> Completed Submission</li>
+                            <li><strong>Focus Areas:</strong></li>
+                            <li class="tech-list">Model Alignment, RLHF, TPUs, LoRA</li>
+                        </ul>
+                         <h4>Core Technologies</h4>
+                        <ul>
+                            <li class="tech-list">JAX, Tunix, DeepSeek-V3</li>
+                        </ul>
+                    </div>
+                    <div class="case-study-main">
+                        <h3>The Engineering Problem</h3>
+                        <p>Large models reason naturally. Small models usually just blurt out an answer. My goal for the Google Tunix Hackathon was to train a small 1B parameter model (Gemma-3-1B-IT) to explicitly generate structured reasoning traces (<code>&lt;reasoning&gt;...&lt;/reasoning&gt;</code>) before arriving at a final answer.</p>
+                        <p>I achieved this by combining Teacher-Student Data Distillation with Group Relative Policy Optimization (GRPO), heavily constrained by the 9-hour TPU v5e session limit on Kaggle.</p>
+
+                        
+
+                        <h3>Data Strategy: Metadata as a Grading Rubric</h3>
+                        <p>To train the model, I used DeepSeek-V3 as a "teacher" to generate a synthetic dataset across Math, Code, and Science. But I didn't just ask the teacher for text. I explicitly prompted it to output <strong>hidden checkpoints</strong> in the metadata alongside the answer.</p>
+                        <p>Here is an example of what the distilled training data looked like. Notice how the metadata turns the dataset into a self-grading rubric for Process Supervision:</p>
+<div class="image-placeholder" style="background-color: transparent; border: none;">
+    <img src="distillation-pipeline.png" alt="Metadata-Aware Distillation Pipeline" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+</div>
+<p class="caption">The Teacher-Student distillation pipeline using DeepSeek-V3 to generate self-grading metadata checkpoints.</p>
+<pre><code class="language-json">{
+  "domain": "math",
+  "prompt": "A store sells apples for $2 and oranges for $3. If I buy 4 apples and 3 oranges, and pay with a $20 bill, how much change do I get?",
+  "chosen": "&lt;reasoning&gt;1. Calculate cost of apples: 4 * $2 = $8...&lt;/reasoning&gt;&lt;answer&gt;$3&lt;/answer&gt;",
+  "metadata": { 
+    "checkpoints": ["4 * 2 = 8", "3 * 3 = 9", "8 + 9 = 17", "20 - 17"], 
+    "final_answer": "3" 
+  }
+}</code></pre>
+                        <p>To optimize for TPU throughput, I strictly filtered every sample to fit within 256 input tokens and 512 output tokens. This fixed shape prevented memory fragmentation from padding and allowed me to maximize batch sizes.</p>
+
+                        <h3>The Training Pipeline</h3>
+                        <p>I used a two-stage approach to align the model.</p>
+                        
+                        <h4>Stage 1: Supervised Fine-Tuning (SFT)</h4>
+                        <p>Before doing any reinforcement learning, I ran 500 steps of SFT. The goal here wasn't to teach logic; it was just to teach syntax. I needed the model to consistently output the correct XML tags. Skipping this step usually causes the RL agent to waste time exploring bad formats, leading to reward collapse.</p>
+
+                        
+
+                        <h4>Stage 2: GRPO Alignment</h4>
+                        <p>Instead of using PPO (which requires a memory-heavy Critic model), I used GRPO. The model generates 4 different answers for the same prompt, and we score them against each other using a 3-pillar reward system:</p>
+                        <ul>
+                            <li><strong>Format Reward:</strong> Strictly enforces the XML schema (<code>&lt;reasoning&gt;</code> and <code>&lt;answer&gt;</code> tags).</li>
+                            <li><strong>Process Reward:</strong> Uses the metadata checkpoints to give partial credit for hitting logical milestones, even if the final answer is wrong.</li>
+                            <li><strong>Outcome Reward:</strong> Validates the final result against the ground truth.</li>
+                        </ul>
+                        <p>Below is the actual Python implementation for the <strong>Process Reward</strong>, which parses the generated text and scores it based on how many metadata checkpoints it hit:</p>
+<div class="image-placeholder" style="background-color: transparent; border: none;">
+    <img src="grpo-loop.png" alt="GRPO Reinforcement Learning Loop" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+</div>
+<p class="caption">The Group Relative Policy Optimization (GRPO) loop evaluating 4 parallel generations against the 3-pillar reward system.</p>
+<pre><code class="language-python">def reward_math_checkpoints(prompts, completions, **kwargs):
+    metadata_json_batch = kwargs.get("metadata_json", [])
+    rewards = []
+
+    for i, text in enumerate(completions):
+        if i >= len(metadata_json_batch): 
+            rewards.append(0.0); continue
+
+        try: meta = json.loads(metadata_json_batch[i])
+        except: meta = {}
+        
+        checkpoints = meta.get("checkpoints", [])
+        if not checkpoints:
+            rewards.append(0.0); continue
+
+        # Extract the reasoning block
+        reasoning_match = re.search(r"&lt;reasoning&gt;(.*?)&lt;/reasoning&gt;", text, re.DOTALL)
+        if not reasoning_match:
+            rewards.append(0.0); continue
+
+        # Reward the model for hitting intermediate logical steps
+        content = reasoning_match.group(1)
+        hits = sum(1 for cp in checkpoints if str(cp) in content)
+        rewards.append(hits * 0.2)
+        
+    return rewards</code></pre>
+    <p><strong>The Sparse Reward Trap:</strong> One major issue with training reasoning models is "sparse rewards"—if the model never accidentally guesses the right answer during exploration, it gets a reward of 0 and learns nothing. To fix this, I adapted elements of the MPO (Mixed Preference Optimization) framework. By blending a format reward (did it use the XML tags?) with the mathematical process reward, the model received partial credit for formatting correctly, guiding it toward the correct logic paths even when the final answer was wrong.</p>
+
+                        <h3>Fitting the Hardware Constraints</h3>
+                        <p>Running a training loop with 4 parallel generations on a single Kaggle TPU v5e is tight. To prevent Out of Memory (OOM) errors, I used LoRA (Rank 32, Alpha 16) instead of full fine-tuning. I also engineered a memory-efficient loop using Tunix's gradient accumulation features (<code>micro_batch=1</code>, <code>mini_batch=4</code>) to simulate larger batch sizes without crashing the instance.</p>
+                        <p><strong>The "EOS" Safety Protocol:</strong> To fit the strict 512-token output limit in TPU memory, I had to filter the dataset. The standard approach is to simply truncate long responses. However, truncating cuts off the <code>&lt;EOS&gt;</code> (End of Sequence) token. If you train a model on truncated text, it never learns when to stop thinking, leading to catastrophic "infinite generation loops" during inference. My hack was to strictly discard over-length samples entirely rather than truncating them, preserving the structural integrity of the EOS token across the entire dataset.</p>
+
+                        <h3>The Results</h3>
+                        <p>The training logs proved the concept. During SFT, the model converged on the XML format. During GRPO, the process reward metric showed steady improvement. Running an evaluation across 849 unseen samples yielded a <strong>91.0% Full Format Accuracy</strong>.</p>
+                        <p>Here is an actual inference output from the final merged 1B model. It successfully breaks down concepts into explicit, step-by-step traces before jumping to a conclusion, a behavior entirely absent in the base model:</p>
+
+<pre><code class="language-text">Prompt: Explain why the sky is blue using simple physics.
+
+Result:
+&lt;reasoning&gt;
+The sky appears blue because of a phenomenon called Rayleigh scattering. Sunlight is made up of all the colors of the rainbow. When sunlight enters the Earth's atmosphere, it collides with tiny air molecules (mostly nitrogen and oxygen). Shorter wavelengths (blue and violet) are scattered much more strongly than longer wavelengths (red and orange). Because blue light is scattered so much, it's dispersed all over the sky, making it look blue to our eyes.
+&lt;/reasoning&gt;
+&lt;answer&gt;
+The sky appears blue because of Rayleigh scattering. Sunlight is composed of all colors. When sunlight enters the atmosphere, it collides with air molecules. Shorter wavelengths (blue and violet) are scattered much more effectively than longer wavelengths, dispersing blue light in all directions.
+&lt;/answer&gt;</code></pre>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="container">
+                    <p>&copy; 2026 Abhay Arora. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        function initPage() {
+            const mainContent = document.querySelector('.main-content');
+            
+            // 1. Progress Bar Logic
+            mainContent.addEventListener('scroll', () => {
+                const scrollTop = mainContent.scrollTop;
+                const scrollHeight = mainContent.scrollHeight - mainContent.clientHeight;
+                const scrolled = (scrollTop / scrollHeight) * 100;
+                document.getElementById("scrollProgressBar").style.width = scrolled + "%";
+            });
+
+            // 2. Theme Toggle Logic (Matches Homepage)
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const currentTheme = localStorage.getItem('theme');
+            
+            if (currentTheme) {
+                body.classList.add(currentTheme);
+            } else if (!window.matchMedia || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.classList.remove('light-theme');
+            } else {
+                body.classList.add('light-theme');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-theme');
+                let theme = body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
+                localStorage.setItem('theme', theme);
+            });
+
+            // 3. Custom Cursor Logic
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const interactiveElements = document.querySelectorAll('a, button, details, summary');
+            
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseover', () => cursorOutline.classList.add('grow'));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('grow'));
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap === 'undefined') { console.error("GSAP not loaded!"); return; }
+            initPage();
+        });
+    </script>
+</body>
+</html>

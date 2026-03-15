@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anatomy of an Agent: A Curiocity Deep Dive | Abhay Arora</title>
+    <title>Curiocity: Multi-Agent AI | Abhay Arora</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -11,10 +11,16 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        .case-study-main { overflow-x: hidden; }
+        .case-study-main p { position: static !important; display: block !important; margin-top: 0 !important; margin-bottom: 1.25rem !important; line-height: 1.7 !important; height: auto !important; opacity: 1 !important; z-index: 1; width: 100% !important; max-width: 100% !important; white-space: normal !important; word-wrap: break-word !important; overflow-wrap: break-word !important; }
+        .case-study-main pre { background-color: #2D2D2D; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; margin: 1.5rem 0; white-space: pre; }
+        .case-study-main code { font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; }
+        .case-study-main p > code, .case-study-main li > code { background-color: #333333; color: #AAAAAA; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85rem; white-space: nowrap; }
+    </style>
 </head>
 <body class="case-study-page">
-    <canvas id="generative-background"></canvas>
-
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
@@ -30,9 +36,8 @@
                 </a>
                 <nav class="sidebar-nav">
                     <ul>
-                         <li><a href="index.html#work" title="Work"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><span>Work</span></a></li>
+                        <li><a href="index.html#work" title="Work"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><span>Work</span></a></li>
                         <li><a href="index.html#profile" title="Profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></a></li>
-                        <li><a href="index.html#blog" title="Blog"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg><span>Blog</span></a></li>
                         <li><a href="index.html#contact" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><span>Contact</span></a></li>
                     </ul>
                 </nav>
@@ -49,9 +54,11 @@
             <section class="case-study-header">
                 <div class="container">
                     <a href="index.html#work" class="back-link">&larr; Back to all projects</a>
-                    <h1>Anatomy of an Agent</h1>
-                    <p class="case-study-subtitle">A first-principles deep dive into the architecture of a multi-agent conversational AI.</p>
-                     <a href="[VIDEO LINK PENDING]" target="_blank" class="btn case-study-main-cta">Watch Video Demo</a>
+                    <h1>Curiocity: Orchestrating Multiple Agents</h1>
+                    <p class="case-study-subtitle">A 0-to-1 build of a stateful, interruptible multi-agent conversational AI platform.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; flex-wrap: wrap;">
+                        <a href="https://github.com/SPAbhay/CurioCity" target="_blank" class="btn case-study-main-cta">View Source Code</a>
+                    </div>
                 </div>
             </section>
 
@@ -60,105 +67,146 @@
                     <div class="case-study-sidebar">
                         <h4>Project Details</h4>
                         <ul>
-                            <li><strong>Role:</strong> Architect & Engineer</li>
-                            <li><strong>Timeline:</strong> 4 Weeks</li>
-                            <li><strong>Status:</strong> Archived Demo</li>
+                            <li><strong>Type:</strong> Architecture Deep Dive</li>
                             <li><strong>Focus Areas:</strong></li>
-                            <li class="tech-list">Agentic Architecture, State Management, Multi-Agent Systems, Observability</li>
+                            <li class="tech-list">Agentic Architecture, State Management, LLMOps</li>
                         </ul>
                          <h4>Core Technologies</h4>
                         <ul>
-                            <li class="tech-list">LangGraph, LangSmith, PyTorch, FastAPI, ElevenLabs API</li>
+                            <li class="tech-list">LangGraph, FastAPI, Pydantic</li>
+                            <li class="tech-list">Unsloth/LoRA, PyTorch</li>
+                            <li class="tech-list">LangSmith</li>
                         </ul>
                     </div>
                     <div class="case-study-main">
-                        <h3>The Premise: Beyond Passive Listening</h3>
-                        <p>I love podcasts, but they are a fundamentally lonely experience. You're a passive consumer of a one-way broadcast. When a burning question arises, your only option is to pause, pull out your phone, and break the flow. What if you could interrupt? What if you could challenge the speaker, ask for an analogy, or dive deeper into a tangent in real-time?</p>
-                        <p>This question was the genesis of 'Curiocity'. This project wasn't just about generating audio. It was a first-principles exploration into a single, hard question: **How do you architect a conversation that is not just reactive, but stateful, interruptible, and robust enough to manage multiple autonomous agents?**</p>
+                        <h3>The Engineering Goal</h3>
+                        <p>Most AI chats are strictly sequential and involve a single model. My goal with Curiocity was to engineer a 0-to-1 platform where multiple distinct AI agents interact simultaneously, debate topics, and can be dynamically interrupted and steered by a human user in real-time.</p>
+                        <div class="image-placeholder" style="background-color: transparent; border: none; margin-top: 1rem;">
+    <img src="curiocity-setup.jpg" alt="Curiocity Setup and Persona Selection" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+</div>
+<p class="caption">The Vue 3 frontend: Users define the guiding themes and select the specific AI persona for the LangGraph state machine before the podcast begins.</p>
+                        <h3>Architecture: State Machines over Chains</h3>
+                        <p>A standard <code>Input -> LLM -> Output</code> pipeline fundamentally fails in a multi-agent setup. If a user interrupts an ongoing debate, a simple linear chain loses track of the conversational context.</p>
+                        <p>To solve this, I orchestrated the agents using LangGraph, modeling the conversation as a state machine. The graph dictates whose turn it is to speak, how to handle external tool calls, and exactly how to transition back to the main flow after an interruption.</p>
+                        <p>The entire orchestration engine was served via FastAPI (REST APIs). To ensure reliable downstream integration between the agents and the client, I implemented strict schema validation and structured data extraction using Pydantic.</p>
+                        <h4>LLM-as-a-Judge & Structured Output Routing</h4>
+<p>To ensure the conversation stays on track, the graph doesn't just transition blindly. It uses an "LLM-as-a-Judge" pattern. After the expert speaks, the <code>EVALUATE_THEME_COVERAGE</code> node invokes a general LLM with a strict Pydantic schema to grade the response. If the LLM returns <code>is_covered: True</code>, the graph router moves to the next theme. If <code>False</code>, it loops back to the interviewer.</p>
+
+<pre><code class="language-python"># From: backend/main.py
+class CoverageEvaluationOutput(BaseModel):
+    is_covered: bool = Field(description="Set to true if the theme was adequately covered, false otherwise.")
+    reasoning: str = Field(description="Explanation for why the theme was or was not considered covered.")
+
+# ... inside evaluate_coverage_endpoint ...
+parser = PydanticOutputParser(pydantic_object=CoverageEvaluationOutput)
+retry_parser = RetryWithErrorOutputParser.from_llm(parser=parser, llm=general_llm)
+
+# The LLM strictly evaluates the current state against the schema
+evaluation_result = await retry_parser.aparse_with_prompt(response.content, prompt_value)
+
+# The graph router uses this deterministic boolean to decide the next edge
+if evaluation_result.is_covered:
+    # Route to END or next theme
+else:
+    # Route back to Curious Casey for a follow-up</code></pre>
+                        <h3>Core Mechanics & Problem Solving</h3>
+
+                        <details class="accordion-item">
+                            <summary>Explicit State & Memory Management</summary>
+                            <div class="accordion-content">
+                                <p><strong>Problem:</strong> Pushing the entire chat history back and forth between multiple agents rapidly exhausts context windows and degrades response quality.</p>
+                                <p><strong>Solution:</strong> I treated state management as a first-class architectural component. I built a dedicated "summarizer node" into the graph. After a set number of turns, this node explicitly compresses the conversational state into a rolling summary. The next agent receives only this dense summary plus the immediate previous turn, keeping the system fast, cheap, and focused.</p>
+                            </div>
+                        </details>
+
+                        <details class="accordion-item">
+                            <summary>Persona Enforcement via LoRA Fine-Tuning</summary>
+                            <div class="accordion-content">
+                                <p><strong>Problem:</strong> Prompt engineering a single massive API model to act like 4 distinct characters usually results in them all bleeding into the same generic "AI" tone.</p>
+                                <p><strong>Solution:</strong> I moved away from monolithic API calls. I created specialized, quantized GGUF models (e.g., <code>curious_casey_q4_k_m.gguf</code>, <code>analogy_alex_q4_k_m.gguf</code>) and orchestrated them locally using Ollama. By binding a specific, distinct model to specific nodes in the LangGraph, I achieved true multi-agent persona separation without massive cloud inference costs.</p>
+                            </div>
+                        </details>
                         
-                        <h3>The Core Architectural Choice: State Machines over Chains</h3>
-                        <p>The initial, naive approach for any conversational AI is a simple chain: `Input -> LLM -> Output`. This works for a single turn, but it fundamentally fails for a dynamic conversation. A real dialogue is not a straight line; it's a cyclical, stateful, and often unpredictable graph.</p>
-                        <p>I quickly realized the system needed to be modeled not as a chain, but as a **state machine**. This was a critical insight. It meant I wasn't just prompting an LLM; I was orchestrating a workflow. This is where **LangGraph** became the non-negotiable core of the architecture. It's a library for building stateful, multi-agent applications, and it was the perfect tool for the job.</p>
-                        <div class="image-placeholder">[Simple state machine diagram: Idle -> Agent_1_Turn -> Agent_2_Turn -> User_Interruption -> Resume_Dialogue]</div>
-                        <p class="caption">A simplified view of the Curiocity conversational graph. Each node represents a state, and the edges represent the rules for transitioning between them.</p>
-                        <p>By defining the conversation as a graph, I could explicitly manage its state. The system always knows whose turn it is, what the topic is, and how to handle an interruption. When a user interjects, the graph transitions to a `user_question` state, processes the query (often using a RAG tool to pull in external knowledge), generates an answer, and then seamlessly transitions back to the previous conversational state. LangGraph provided the control, predictability, and robustness that is impossible to achieve with simple chaining.</p>
-
-                        <h3>The Hard Problems & My Solutions</h3>
-                        <p>Building this system surfaced the fundamental, often unspoken, challenges of agentic AI. Here’s a brutally honest breakdown of how I tackled them from first principles.</p>
                         <details class="accordion-item">
-                            <summary>1. The State Problem: Agents Have No Memory</summary>
+                            <summary>System Observability</summary>
                             <div class="accordion-content">
-                                <p><strong>The Challenge:</strong> By default, LLM agents are amnesiacs. They have no memory of what was said three turns ago, leading to repetitive or nonsensical dialogue. Simply stuffing the entire chat history into the context window is a brute-force solution that is inefficient, expensive, and quickly hits token limits.</p>
-                                <p><strong>My Solution:</strong> I treated state management as a first-class citizen of the architecture. Each turn in the LangGraph doesn't just generate a response; it also invokes a dedicated "summarizer" node that generates a concise, running summary of the conversation. This summary, along with the last two turns of raw dialogue, is what's passed to the next agent. It acts as a compressed, rolling form of memory. This taught me a crucial lesson: for any long-running or complex agentic task, you must architect an explicit memory system. Relying on the context window alone is a recipe for failure.</p>
+                                <p><strong>Problem:</strong> Debugging a multi-agent system where state transitions happen asynchronously and data is passed dynamically between nodes is nearly impossible with standard logging.</p>
+                                <p><strong>Solution:</strong> I integrated LangSmith deep into the architecture. This provided high-fidelity tracing for every state transition, LLM input/output, and latency spike. It converted a black-box multi-agent orchestration into a fully observable, predictable system.</p>
                             </div>
                         </details>
                         <details class="accordion-item">
-                            <summary>2. The Persona Problem: Agents are Generic Conformists</summary>
+                            <summary>Human-in-the-Loop (Graph Interruption)</summary>
                             <div class="accordion-content">
-                                <p><strong>The Challenge:</strong> My two AI agents, an "Expert" and a "Skeptic," initially sounded identical. Simple instructions like "act like a skeptic" were insufficient. LLMs are trained to be agreeable and helpful; forcing one to be consistently contrarian is an unnatural act.</p>
-                                <p><strong>My Solution:</strong> I realized that creating a believable persona is an act of engineering, not just prompting. My solution was a multi-layered approach to persona enforcement:
-                                <ul>
-                                    <li><strong>Hyper-Detailed System Prompts:</strong> I wrote extensive backstories for each agent, defining their intellectual stances, their vocabulary, their level of patience, and even their flaws.</li>
-                                    <li><strong>Few-Shot Examples:</strong> Each prompt included 3-5 examples of the agent responding in character to various inputs, providing a powerful stylistic anchor.</li>
-                                    <li><strong>Architectural Separation:</strong> For the "Skeptic" persona, I experimented with using a smaller, locally fine-tuned model (a quantized Llama 3 8B via PyTorch/Unsloth). The inherent constraints and different training data of a separate model gave it a more unique and less "corporate" voice than the powerful, general-purpose model used for the "Expert."</li>
-                                </ul>
-                                This taught me that true persona is an emergent property of the entire system, not just a single instruction.</p>
-                            </div>
-                        </details>
-                         <details class="accordion-item">
-                            <summary>3. The Observability Problem: Agents are Opaque Black Boxes</summary>
-                            <div class="accordion-content">
-                                <p><strong>The Challenge:</strong> When an agent produced a bizarre or incorrect response, debugging was a nightmare. I had no visibility into its "thought process." What was the exact prompt it received after the memory summarization? Did the tool call fail? Why did the graph transition to the wrong state?</p>
-                                <p><strong>My Solution:</strong> I integrated **LangSmith** from day one. This was not a "nice-to-have"; it was the single most important decision for the project's success. LangSmith provided a complete, high-fidelity trace of every single run through the graph. I could see every LLM input and output, every tool call, the latency of each step, and the exact path the conversation took through the state machine. It turned debugging from an art into a science. The key takeaway was profound: **you cannot responsibly build a complex AI system without a robust observability and tracing tool.** It is the equivalent of trying to debug a complex microservices architecture without logs.</p>
+                                <p><strong>Problem:</strong> Standard LLM chains are fire-and-forget. Once started, a user cannot interject or steer the conversation until it finishes.</p>
+                                <p><strong>Solution:</strong> By leveraging LangGraph's <code>MemorySaver</code> checkpointer, I configured the graph with <code>interrupt_after=["EVALUATE_THEME_COVERAGE"]</code>. This explicitly freezes the state machine, allowing the FastAPI backend to yield. If the user submits a doubt via the UI, the <code>submit_doubt_endpoint</code> mutates the frozen state with the user's input and resumes graph execution, dynamically routing to the <code>FACTUAL_FINN_ANSWER_DOUBT</code> node before seamlessly returning to the main podcast flow.</p>
                             </div>
                         </details>
 
-                        <h3>Final Reflection</h3>
-                        <p>Curiocity was more of a personal crucible than a product. It was a deep dive into the practical architecture of agentic AI that forced me to move beyond simple prompts and chains. It taught me to think from first principles about the hard, foundational problems of state, control, and observability.</p>
-                        <p>It is this experience—the successes, the failures, and the lessons learned from wrestling with these core challenges—that now informs how I approach building any serious AI system in a professional environment.</p>
+                        <h4 style="margin-top: 4rem; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">The Personas in Action</h4>
+                        <p>By routing the LangGraph state to different locally orchestrated GGUF models, the system dynamically shifts its conversational tone based on the user's initial selection. Here are three distinct personas answering UX design queries:</p>
+
+                        <div class="image-placeholder" style="background-color: transparent; border: none; margin-top: 2rem;">
+                            <img src="factual-finn.jpg" alt="Factual Finn Persona" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        </div>
+                        <p class="caption"><strong>Factual Finn:</strong> Direct, objective, and lists methods methodically. The Theme Tracker at the top automatically updates as the LLM-as-a-Judge marks topics as "covered".</p>
+
+                        <div class="image-placeholder" style="background-color: transparent; border: none; margin-top: 4rem;">
+                            <img src="example-eve.png" alt="Example Eve Persona" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        </div>
+                        <p class="caption"><strong>Example Eve:</strong> Grounds abstract concepts (like cognitive load) in concrete scenarios. Note the deterministic RAG source citations generated at the bottom.</p>
+
+                        <div class="image-placeholder" style="background-color: transparent; border: none; margin-top: 4rem;">
+                            <img src="analogy-alex.jpg" alt="Analogy Alex Persona" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        </div>
+                        <p class="caption"><strong>Analogy Alex:</strong> Navigates the dialogue by drawing immediate, relatable comparisons to bridge complex ideas.</p>
+
                     </div>
                 </div>
             </section>
-             <footer>
+            <footer>
                 <div class="container">
-                    <p>&copy; 2025 Abhay Arora. All rights reserved.</p>
+                    <p>&copy; 2026 Abhay Arora. All rights reserved.</p>
                 </div>
             </footer>
         </main>
-
-        <aside class="right-sidebar">
-             <div class="social-links">
-                <a href="https://linkedin.com/in/abhay-arora-digital" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
-                <a href="https://github.com/SPAbhay" target="_blank" title="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-                <a href="[LEETCODE PROFILE LINK]" target="_blank" title="LeetCode"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 5.844a1.38 1.38 0 0 0-.438.961v10.392a1.38 1.38 0 0 0 .438.961l5.405 5.405a1.373 1.373 0 0 0 .961.438h7.034a1.373 1.373 0 0 0 .961-.438l5.405-5.405a1.38 1.38 0 0 0 .438-.961V5.844a1.38 1.38 0 0 0-.438-.961L21.478.438a1.374 1.374 0 0 0-.961-.438h-7.034zM2 12h3.5v3.5H2V12zm6.5 0H12v3.5H8.5V12zM2 17.5h3.5V21H2v-3.5zm6.5 0H12V21H8.5v-3.5z"/></svg></a>
-            </div>
-        </aside>
     </div>
 
     <script>
-        // All original JS is preserved here for functionality
         function initPage() {
             const mainContent = document.querySelector('.main-content');
+            
+            // 1. Progress Bar Logic
             mainContent.addEventListener('scroll', () => {
                 const scrollTop = mainContent.scrollTop;
                 const scrollHeight = mainContent.scrollHeight - mainContent.clientHeight;
                 const scrolled = (scrollTop / scrollHeight) * 100;
                 document.getElementById("scrollProgressBar").style.width = scrolled + "%";
             });
+
+            // 2. Theme Toggle Logic (Matches Homepage)
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
             const currentTheme = localStorage.getItem('theme');
-            if (currentTheme) { body.classList.add(currentTheme); } 
-            else if (!window.matchMedia || window.matchMedia('(prefers-color-scheme: dark)').matches) { body.classList.remove('light-theme'); } 
-            else { body.classList.add('light-theme'); }
+            
+            if (currentTheme) {
+                body.classList.add(currentTheme);
+            } else if (!window.matchMedia || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.classList.remove('light-theme');
+            } else {
+                body.classList.add('light-theme');
+            }
+            
             themeToggle.addEventListener('click', () => {
                 body.classList.toggle('light-theme');
                 let theme = body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
                 localStorage.setItem('theme', theme);
             });
+
+            // 3. Custom Cursor Logic
             const cursorDot = document.querySelector('.cursor-dot');
             const cursorOutline = document.querySelector('.cursor-outline');
             const interactiveElements = document.querySelectorAll('a, button, details, summary');
+            
             window.addEventListener('mousemove', (e) => {
                 const posX = e.clientX;
                 const posY = e.clientY;
@@ -166,83 +214,17 @@
                 cursorDot.style.top = `${posY}px`;
                 cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
             });
+            
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseover', () => cursorOutline.classList.add('grow'));
                 el.addEventListener('mouseleave', () => cursorOutline.classList.remove('grow'));
             });
         }
-        function startAnimations() {
-            const socialLinks = document.querySelectorAll('.right-sidebar .social-links a');
-            socialLinks.forEach(link => {
-                const icon = link.querySelector('svg');
-                link.addEventListener('mousemove', (e) => {
-                    const { left, top, width, height } = link.getBoundingClientRect();
-                    const centerX = left + width / 2;
-                    const centerY = top + height / 2;
-                    const deltaX = e.clientX - centerX;
-                    const deltaY = e.clientY - centerY;
-                    const moveX = -deltaX * 0.5;
-                    const moveY = -deltaY * 0.5;
-                    gsap.to(icon, { x: moveX, y: moveY, duration: 0.6, ease: "power3.out" });
-                });
-                link.addEventListener('mouseleave', () => {
-                    gsap.to(icon, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" });
-                });
-            });
-        }
-        function initGenerativeBackground() {
-            const canvas = document.getElementById('generative-background');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let width, height, dots;
-            const mouse = { x: null, y: null, radius: 150 };
-            function resize() {
-                width = canvas.width = window.innerWidth;
-                height = canvas.height = window.innerHeight;
-                dots = [];
-                const dotSpacing = 40;
-                const columns = Math.floor(width / dotSpacing);
-                const rows = Math.floor(height / dotSpacing);
-                for (let x = 0; x < columns; x++) {
-                    for (let y = 0; y < rows; y++) {
-                        dots.push({ baseX: (x * dotSpacing) + (dotSpacing / 2), baseY: (y * dotSpacing) + (dotSpacing / 2), x: (x * dotSpacing) + (dotSpacing / 2), y: (y * dotSpacing) + (dotSpacing / 2), density: (Math.random() * 30) + 1 });
-                    }
-                }
-            }
-            window.addEventListener('resize', resize);
-            window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-            function animate() {
-                ctx.clearRect(0, 0, width, height);
-                const dotColor = document.body.classList.contains('light-theme') ? 'rgba(36, 41, 47, 0.2)' : 'rgba(201, 209, 217, 0.2)';
-                ctx.fillStyle = dotColor;
-                dots.forEach(dot => {
-                    let dx = mouse.x - dot.x; let dy = mouse.y - dot.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    let forceDirectionX = dx / distance; let forceDirectionY = dy / distance;
-                    let maxDistance = mouse.radius;
-                    let force = (maxDistance - distance) / maxDistance;
-                    let directionX = forceDirectionX * force * dot.density;
-                    let directionY = forceDirectionY * force * dot.density;
-                    if (distance < mouse.radius) {
-                        dot.x -= directionX; dot.y -= directionY;
-                    } else {
-                        if (dot.x !== dot.baseX) { dot.x -= (dot.x - dot.baseX) / 10; }
-                        if (dot.y !== dot.baseY) { dot.y -= (dot.y - dot.baseY) / 10; }
-                    }
-                    ctx.beginPath(); ctx.arc(dot.x, dot.y, 1.5, 0, Math.PI * 2); ctx.fill();
-                });
-                requestAnimationFrame(animate);
-            }
-            resize();
-            animate();
-        }
+
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof gsap === 'undefined') { console.error("GSAP not loaded!"); return; }
             initPage();
-            startAnimations();
-            initGenerativeBackground();
         });
     </script>
 </body>
 </html>
-

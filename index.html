@@ -59,7 +59,7 @@
                     
                     <div class="hero-cta-group">
                         <a href="#work" class="btn">View My Work</a>
-                        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+                        <a href="Abhay_Arora_AI_ML_Engineer.pdf" target="_blank" class="btn btn-outline">View Resume</a>
                     </div>
 
                 </div>
@@ -88,33 +88,50 @@
                     <h2><span class="title-text">Projects & Writing</span></h2>
                     
                     <div class="case-study-grid">
+                        <a href="case-study-tunix.html" class="case-study-feature-card">
+                            <div class="feature-card-content">
+                                <span class="feature-card-tag">Case Study</span>
+                                <h3>Tunix: Reasoning Model Alignment</h3>
+                                <p>Distilled Chain-of-Thought reasoning into Gemma-3-1B-IT. Engineered a memory-efficient GRPO loop on a single TPU v5e using custom gradient accumulation strategies, enabling 4x parallel generation without OOM.</p>
+                                <div class="feature-card-focus">
+                                    <span>JAX</span>
+                                    <span>GRPO & DPO</span>
+                                    <span>TPU</span>
+                                    <span>Fine-Tuning</span>
+                                </div>
+                            </div>
+                            <div class="feature-card-visual" style="background-image: url('distillation-pipeline.png'); background-size: cover; background-position: center; border: 1px solid var(--border-color);"></div>
+                        </a>
+
                         <a href="case-study-whatsgood.html" class="case-study-feature-card">
                             <div class="feature-card-content">
                                 <span class="feature-card-tag">Case Study</span>
-                                <h3>The What's Good Blueprint</h3>
-                                <p>A production deconstruction: From a simple Python script to a live, scalable AI service deployed on AWS with a full CI/CD pipeline.</p>
+                                <h3>What's Good: AI Systems</h3>
+                                <p>Architected a distributed RAG pipeline on AWS, reducing p95 end-to-end latency from 17s to 6s through asynchronous parallelization. Implemented real-time vector interpolation for instant persona adaptation.</p>
                                 <div class="feature-card-focus">
+                                    <span>System Design</span>
                                     <span>MLOps</span>
-                                    <span>System Architecture</span>
-                                    <span>CI/CD</span>
+                                    <span>RAG</span>
+                                    <span>AWS</span>
                                 </div>
                             </div>
-                            <div class="feature-card-visual"></div>
+                            <div class="feature-card-visual" style="background-image: url('WhatsGood Arch Diag.png'); background-size: cover; background-position: center; border: 1px solid var(--border-color);"></div>
                         </a>
 
-                        <!-- <a href="case-study-curiocity.html" class="case-study-feature-card">
+                        <a href="case-study-curiocity.html" class="case-study-feature-card">
                             <div class="feature-card-content">
                                 <span class="feature-card-tag">Case Study</span>
-                                <h3>Anatomy of an Agent</h3>
-                                <p>A first-principles deep dive into architecting stateful, interruptible, and robust multi-agent conversational AI using LangGraph.</p>
+                                <h3>Curiocity: Multi-Agent AI</h3>
+                                <p>Engineered a 0-1 multi-agent conversational AI platform. Orchestrated agents via LangGraph and FastAPI with strict Pydantic schema validation. Fine-tuned local models with Unsloth/LoRA for specialized behavioral control.</p>
                                 <div class="feature-card-focus">
-                                    <span>Agentic Architecture</span>
                                     <span>LangGraph</span>
+                                    <span>FastAPI</span>
                                     <span>State Management</span>
+                                    <span>Unsloth/LoRA</span>
                                 </div>
                             </div>
-                            <div class="feature-card-visual"></div>
-                        </a> -->
+                            <div class="feature-card-visual" style="background-image: url('example-eve.png'); background-size: cover; background-position: top center; border: 1px solid var(--border-color);"></div>
+                        </a>
                     </div>
 
                     <!-- <h3 class="section-subheading">Thoughts & Articles</h3> -->
@@ -163,38 +180,45 @@
                 <div id="about" class="profile-subsection">
                     <div class="container">
                         <h2><span class="title-text">About Me</span></h2>
-                        <p class="about-text">I'm an AI Engineer driven by a deep curiosity for building intelligent systems from the ground up. My journey started in product design, where I developed a passion for understanding user needs and crafting elegant solutions. This design-centric approach now informs my engineering philosophy: I build AI not just to be technically robust, but also to be intuitive, purposeful, and genuinely useful.</p>
-                        <p class="about-text">I thrive on the challenges found at the intersection of research and production. Whether it's architecting a complex multi-agent system or deploying a scalable service on AWS, my goal is always the same: to take an idea from a whiteboard sketch to a reliable, high-impact product. I believe the most exciting work in AI is happening right now, and I'm dedicated to being on the front lines, building the tools that will define the future.</p>
+                        <p class="about-text">I'm an AI Systems Engineer obsessed with the space where cutting-edge research meets production reality. My engineering DNA was forged in hackathons and leading technical communities, which taught me how to take abstract concepts—like reasoning model alignment or multi-agent orchestration—and forge them into robust, scalable architectures.</p>
+                        <p class="about-text">I don't just build wrappers. Whether I'm writing custom JAX training loops for TPUs, orchestrating stateful LangGraph deployments on AWS, or evaluating agent faithfulness with RAGAS, my goal is always end-to-end ownership. I believe the future belongs to engineers who can bridge the gap between algorithmic research and high-performance, fault-tolerant systems.</p>
                     </div>
                 </div>
                 <div id="experience" class="profile-subsection">
                     <div class="container">
                         <h2><span class="title-text">Experience</span></h2>
-                        <div class="experience-list">
-                            
+                        <div class="experience-list">  
                             <div class="experience-item">
                                 <div class="experience-details">
-                                    <h3>Associate Data Scientist</h3>
+                                    <h3>Associate Data Scientist (ML/AI Engineer)</h3>
                                     <p class="company-date">Epsilon &bull; Aug 2024 - Present</p>
-                                    <p class="description">Architecting and deploying production-grade agentic AI solutions (Insight Automation, Text-to-SQL agents) using MLflow. I lead research on GNN-LLM recommenders,  and serve as a major contributor for LLMOps and MLOps. </p>
+                                    <p class="description">Architected and deployed production-grade agentic AI solutions, orchestrating multi-agent workflows from R&D to REST API model serving. Rigorously validated Text-to-SQL agents using RAGAS to ensure a Faithfulness score of 0.9. Built a multi-model propensity framework on Databricks driving a 15% conversion lift.</p>
                                 </div>
+                            </div>
+
+                            <div class="experience-item">
+                                <div class="experience-details">
+                                    <h3>Researcher & Conference Speaker</h3>
+                                    <p class="company-date">12th ICBAI Conference &bull; 2025</p>
+                                    <p class="description">Authored and delivered an oral presentation on "Novel Hybrid GNN-LLM Recommender System via Behavioral Semantic Profiling." Delivered a 34.5% lift in NDCG@20 over LightGCN baselines in text-scarce environments using InfoNCE loss.</p>
                                 </div>
+                            </div>
 
                             <div class="experience-item">
                                 <div class="experience-details">
                                     <h3>Data Analyst Intern</h3>
                                     <p class="company-date">Epsilon &bull; Feb 2024 - Aug 2024</p>
-                                    <p class="description">Engineered a production-grade, scaled PySpark implementation of the TIFUKNN research paper for a time-aware recommendation system.  Developed a projection modeling framework to forecast high-value customer behavior. </p>
+                                    <p class="description">Engineered a scaled implementation of the TIFUKNN research paper in PySpark, delivering a time-aware recommendation system that achieved a 7% lift in NDCG. Developed a projection modeling framework on a 10M+ user dataset.</p>
                                 </div>
-                                </div>
+                            </div>
 
                             <div class="experience-item">
                                 <div class="experience-details">
-                                    <h3>B.Tech, AI & Robotics</h3>
+                                    <h3>B.Tech, Computer Science (Spec. in AI & Robotics)</h3>
                                     <p class="company-date">VIT Chennai &bull; 2020 - 2024</p>
-                                    <p class="description">Graduated with a 9.09/10 CGPA, [cite: 38] [cite_start]focusing on foundational AI principles and leading the university's largest technical club as President. [cite: 41]</p>
+                                    <p class="description">Graduated with a 9.09/10 CGPA. Served as President of the Zero Bugs Club, leading a 50+ member technical group and organizing hackathons for 500+ participants.</p>
                                 </div>
-                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -231,7 +255,6 @@
             <div class="social-links">
                 <a href="https://linkedin.com/in/abhay-arora-digital" target="_blank" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
                 <a href="https://github.com/SPAbhay" target="_blank" title="GitHub"><svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></a>
-                <a href="[LEETCODE PROFILE LINK]" target="_blank" title="LeetCode"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 5.844a1.38 1.38 0 0 0-.438.961v10.392a1.38 1.38 0 0 0 .438.961l5.405 5.405a1.373 1.373 0 0 0 .961.438h7.034a1.373 1.373 0 0 0 .961-.438l5.405-5.405a1.38 1.38 0 0 0 .438-.961V5.844a1.38 1.38 0 0 0-.438-.961L21.478.438a1.374 1.374 0 0 0-.961-.438h-7.034zM2 12h3.5v3.5H2V12zm6.5 0H12v3.5H8.5V12zM2 17.5h3.5V21H2v-3.5zm6.5 0H12V21H8.5v-3.5z"/></svg></a>
             </div>
         </aside>
     </div>
@@ -479,9 +502,9 @@
             let animationFrameId = null;
             const skillsData = [
                 { layer: "MLOps & Production", skills: ["Docker", "CI/CD", "AWS", "MLflow", "FastAPI"], color: { dark: "rgba(255, 87, 34, 1)", light: "rgba(208, 68, 11, 1)" } },
-                { layer: "Generative AI", skills: ["LangGraph", "Agentic AI", "RAG", "Vector DBs"], color: { dark: "rgba(233, 30, 99, 1)", light: "rgba(197, 17, 82, 1)" } },
-                { layer: "Core ML", skills: ["PyTorch", "Scikit-Learn", "PySpark", "SQL"], color: { dark: "rgba(33, 150, 243, 1)", light: "rgba(11, 113, 203, 1)" } },
-                { layer: "Leadership", skills: ["Ownership", "Mentorship", "Roadmapping"], color: { dark: "rgba(76, 175, 80, 1)", light: "rgba(46, 125, 50, 1)" } }
+                { layer: "Generative AI", skills: ["LangGraph", "GRPO/DPO Alignment", "Agentic AI", "RAG"], color: { dark: "rgba(233, 30, 99, 1)", light: "rgba(197, 17, 82, 1)" } },
+                { layer: "Core ML", skills: ["JAX / TPUs", "PyTorch", "PySpark", "Databricks"], color: { dark: "rgba(33, 150, 243, 1)", light: "rgba(11, 113, 203, 1)" } },
+                { layer: "Leadership", skills: ["End-to-End Ownership", "Mentorship", "System Design"], color: { dark: "rgba(76, 175, 80, 1)", light: "rgba(46, 125, 50, 1)" } }
             ];
             function resize() {
                 if (!canvas.offsetParent) return;
