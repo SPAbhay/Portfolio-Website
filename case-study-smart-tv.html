@@ -92,7 +92,7 @@
                     <div class="case-study-sidebar">
                         <h4>Project Details</h4>
                         <ul>
-                            <li><strong>Type:</strong> System Design Architecture</li>
+                            <li><strong>Type:</strong> System Design Case Study</li>
                             <li><strong>Focus Areas:</strong></li>
                             <li class="tech-list">Distributed Systems, Edge Caching, GenAI, ML RecSys</li>
                         </ul>
@@ -213,6 +213,16 @@
                             <p class="caption">Preventing OOM errors by generating at 720p with a custom LoRA, followed by a deterministic 4K upscaler.</p>
                         </div>
                         
+                        <h4>6. MLOps & GPU Optimization (Squeezing the Hardware)</h4>
+                        <p>Even though we decoupled generation from real-time serving, cutting image generation time from 2.0 seconds to 0.4 seconds cuts our AWS GPU bill by 80%. Here is how I would optimize the A10G workers across four layers:</p>
+                        <ul>
+                            <li><strong>Algorithmic (Fewer Steps):</strong> Standard diffusion takes 30+ steps. By applying a <strong>Latent Consistency Model (LCM)</strong> LoRA, we reduce the required denoising steps down to 2-4 with negligible quality loss.</li>
+                            <li><strong>Compiler (Hardware Symbiosis):</strong> We don't run raw dynamic PyTorch in production. Since our image resolution (720p) is fixed, we compile the UNet into an <strong>NVIDIA TensorRT Engine</strong> to fuse layers and optimize kernel selection for our specific GPU architecture.</li>
+                            <li><strong>Memory (Preventing VRAM Bottlenecks):</strong> We cast model weights to <code>bfloat16</code> to halve the memory footprint, and replace standard attention mechanisms with <strong>FlashAttention</strong> to change memory complexity from quadratic to linear.</li>
+                            <li><strong>Pipeline (Keeping the GPU Fed):</strong> GPUs shouldn't wait for network calls. A background CPU process pulls from Kafka, while an async thread uploads to S3. For the LLM generating the trivia, we serve it via <strong>vLLM</strong> using Continuous Batching and PagedAttention to maximize throughput.</li>
+                        </ul>
+                        <p><strong>The Result:</strong> The combined LCM + TensorRT + FlashAttention stack drops our per-image latency to ~0.3 seconds. Our offline factory now only needs <strong>3 GPUs</strong> (instead of 15) to clear the entire daily queue of 100,000 assets.</p>
+
                         <div class="image-placeholder">
                             <img src="bloom_filter.png" alt="Redis Bloom Filter Deduplication Flow" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color);">
                             <p class="caption">Using a Redis Bloom Filter to deduplicate candidates and ensure users never see the same image twice.</p>
