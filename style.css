@@ -727,28 +727,84 @@ background-color: rgba(var(--accent-color-rgb), 0.1);
 }
 
 /* --- Responsive Design --- */
-@media (max-width: 1200px) {
-.left-sidebar, .right-sidebar { display: none; }
-.portfolio-wrapper { display: block; }
-.main-content {
-    margin-left: 100px;
-    margin-right: 100px;
-    width: calc(100% - 200px);
-    overflow-y: auto;
-    height: 100vh;
-    position: relative; 
-    z-index: 5;        
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+/* --- Fixed Responsive Design --- */
+
+/* 1. Disable custom cursor on touch devices to prevent "stuck" dots */
+@media (hover: none) and (pointer: coarse) {
+    .cursor-dot, .cursor-outline { display: none !important; }
+    html, body, a, button { cursor: auto !important; }
 }
-.progress-bar-container { width: 100%; left: 0; }
-.project-card-large { width: 100vw; }
+
+@media (max-width: 1200px) {
+    /* Transform left sidebar into a sleek top header for mobile */
+    .left-sidebar {
+        width: 100%;
+        height: 70px;
+        top: 0;
+        left: 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        background-color: var(--bg-color);
+        padding: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+    }
+
+    .sidebar-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1.5rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Move Logo, Nav, and Toggle into a single line */
+    .logo-icon { margin-bottom: 0; transform: scale(0.8); }
+    .sidebar-nav { flex-grow: 0; }
+    .sidebar-nav ul { display: flex; flex-direction: row; gap: 1.5rem; }
+    .sidebar-nav li { margin-bottom: 0; }
+    .sidebar-nav a span { display: none; } /* Hide text labels, show only icons */
+    .sidebar-nav a { padding: 8px; }
+    .sidebar-footer { margin-top: 0; }
+
+    /* Hide the right sidebar on mobile */
+    .right-sidebar { display: none; }
+
+    /* Fix the Content Layout */
+    .portfolio-wrapper { display: block; padding-top: 70px; }
+    
+    .main-content {
+        margin: 0 !important; /* This fixes the 100px squish */
+        width: 100%;
+        height: calc(100vh - 70px);
+    }
+
+    /* Adjust Progress Bar to sit under the new header */
+    .progress-bar-container {
+        width: 100%;
+        left: 0;
+        top: 70px;
+    }
+
+    .project-card-large { width: 100vw; height: auto; min-height: 100vh; }
 }
 
 @media (max-width: 768px) {
-h2 { font-size: 2.5rem; }
-.project-card-overlay h3 { font-size: 2.5rem; }
-.contact-heading { font-size: clamp(2.5rem, 12vw, 6rem); }
+    /* Scale down headings slightly for mobile phones */
+    h2 { font-size: 2.2rem; margin-bottom: 2.5rem; }
+    .hero-main-heading .heading-line { font-size: clamp(2.5rem, 9vw, 4rem); }
+    .contact-heading { font-size: 3rem; }
+    .container { padding: 0 1.25rem; }
+    
+    /* Hero CTA stacking */
+    .hero-cta-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+    .btn { text-align: center; width: 100%; box-sizing: border-box; }
 }
 
 
@@ -1169,3 +1225,10 @@ body.case-study-page .main-content {
     }
 }
 
+
+@media (max-width: 900px) {
+    .case-study-header {
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+    }
+}
