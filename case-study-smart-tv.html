@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" class="case-study-page-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Designing a Backend System for 50 Million Smart TVs | Abhay Arora</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .case-study-main { overflow-x: hidden; }
+        .case-study-main p { position: static !important; display: block !important; margin-top: 0 !important; margin-bottom: 1.25rem !important; line-height: 1.7 !important; height: auto !important; opacity: 1 !important; z-index: 1; width: 100% !important; max-width: 100% !important; white-space: normal !important; word-wrap: break-word !important; overflow-wrap: break-word !important; }
+        .case-study-main pre { background-color: #2D2D2D; color: #d4d4d4; padding: 1rem; border-radius: 8px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; margin: 1.5rem 0; white-space: pre; }
+        .case-study-main code { font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; }
+        .case-study-main p > code, .case-study-main li > code { background-color: #333333; color: #AAAAAA; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.85rem; white-space: nowrap; }
+        .image-placeholder { 
+            margin: 3rem 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%; 
+            clear: both; /* Forces paragraphs to drop below the image */
+        }
+
+        .image-placeholder img { 
+            display: block;
+            max-width: 100%; 
+            max-height: 550px; /* Prevents extremely tall images from getting cut off or ruining scroll */
+            width: auto;
+            height: auto;
+            object-fit: contain; /* Ensures the entire image fits inside the box without cropping */
+            border-radius: 8px; 
+            border: 1px solid var(--border-color); 
+        }
+
+        .caption { 
+            font-size: 0.85rem; 
+            color: var(--secondary-text); 
+            margin-top: 1rem; 
+            font-style: italic; 
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="case-study-page">
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="scrollProgressBar"></div>
+    </div>
+
+    <div class="portfolio-wrapper">
+        <aside class="left-sidebar">
+            <div class="sidebar-content">
+                <a href="index.html" class="logo-icon">
+                    <svg width="32" height="32" viewBox="0 0 100 100"><rect class="logo-bg" width="100" height="100" rx="20"/><text class="logo-text" x="50" y="68" font-size="50" text-anchor="middle" font-family="Space Grotesk, sans-serif" font-weight="bold">A</text></svg>
+                </a>
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="index.html#work" title="Work"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg><span>Work</span></a></li>
+                        <li><a href="index.html#profile" title="Profile"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span>Profile</span></a></li>
+                        <li><a href="index.html#contact" title="Contact"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg><span>Contact</span></a></li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">
+                        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <section class="case-study-header">
+                <div class="container">
+                    <a href="index.html#work" class="back-link">&larr; Back to all projects</a>
+                    <h1>Designing a Backend System for 50 Million Smart TVs</h1>
+                    <p class="case-study-subtitle">How I architected an asynchronous, edge-cached GenAI pipeline to serve 4K personalized screensavers with zero latency.</p>
+                </div>
+            </section>
+
+            <section class="case-study-content">
+                <div class="container case-study-container">
+                    <div class="case-study-sidebar">
+                        <h4>Project Details</h4>
+                        <ul>
+                            <li><strong>Type:</strong> System Design Architecture</li>
+                            <li><strong>Focus Areas:</strong></li>
+                            <li class="tech-list">Distributed Systems, Edge Caching, GenAI, ML RecSys</li>
+                        </ul>
+                         <h4>Core Technologies</h4>
+                        <ul>
+                            <li class="tech-list">Redis (Bloom Filters), AWS S3/DynamoDB, Kafka, FastAPI, Stable Diffusion XL</li>
+                        </ul>
+                    </div>
+                    <div class="case-study-main">
+                        <h3>The Problem Statement</h3>
+                        <p>Design a backend system for 50 million Smart TVs. When a TV goes idle, it must instantly display personalized, AI-generated content (a 4K image + trivia). At peak (8:00 PM), 5 million TVs might request this simultaneously.</p>
+                        <p>If I attempt to generate a 4K image using an LLM and Stable Diffusion the second a user pauses their TV, it will bankrupt the GPU budget and fail the latency requirements. Here is my solution for enterprise scaling using asynchronous generation and edge-prefetching.</p>
+
+                        <h3>Step 1: Establishing the System Boundaries</h3>
+                        <p>Defining the constraints of the product:</p>
+                        <ul>
+                            <li><strong>Pull or Push:</strong> Unlike a chatbot where a user pulls data by typing a query, a Smart TV screensaver is a push medium. We push content to them when they go idle. Therefore, real-time Vector DB search is not the primary bottleneck.</li>
+                            <li><strong>Scale & Spikes:</strong> We are handling 50 Million daily active TVs. The critical bottleneck is the Prime Time Spike at 8:00 PM, where 5 million TVs might request content within a 60-second window.</li>
+                            <li><strong>Content Mix:</strong> To keep the feed engaging without burning through compute costs, we must establish 2 distinct content buckets:
+                                <ul>
+                                    <li><strong>Trending:</strong> Hyper-relevant to today (e.g., Last Night's Cricket Match). Needs to be generated daily. Has a strict Time-To-Live (TTL) of 24-48 hours.</li>
+                                    <li><strong>Evergreen:</strong> General appeal (e.g., Wildlife, History, Science). Generated once. Never expires (TTL = Infinity), but its serving frequency is governed by a user engagement score.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Latency:</strong> The screensaver must appear in sub-second time after the user pauses the TV.</li>
+                        </ul>
+
+                        <h3>Step 2: Estimations</h3>
+                        <h4>1. Peak Network Egress</h4>
+                        <ul>
+                            <li>With background prefetching, TVs download their heavy 500KB payloads asynchronously via a CDN during off-peak hours.</li>
+                            <li>At the 8:00 PM "Prime Time" spike, 5 million TVs pause within 60 seconds = ~83,000 Requests Per Second (QPS).</li>
+                            <li>Because the image is already cached locally on the TV, the API Gateway only receives a tiny 1KB impression event to log the view.</li>
+                            <li>83,000 QPS * 1KB = <strong>~83 MB/s of outbound API traffic</strong>. By shifting the 500KB payloads to off-peak CDN delivery, we avoid what would have been a catastrophic 41.5 GB/s traffic spike, virtually eliminating backend bandwidth bottlenecks and guaranteeing 0ms rendering latency.</li>
+                        </ul>
+
+                        <h4>2. Storage Scaling</h4>
+                        <ul>
+                            <li><strong>Evergreen Storage:</strong> We pre-generate a base catalog of 5 million evergreen assets. 5M * 500KB = 2.5 Terabytes. Cheap and static.</li>
+                            <li><strong>Trending Storage (Rolling):</strong> We generate 100,000 trending assets per day. 100k * 500KB = 50 GB/day. Because these expire and are deleted after 48 hours TTL, this specific bucket never exceeds ~100GB.</li>
+                        </ul>
+
+                        <h4>3. Offline GPU Compute (The AI Factory)</h4>
+                        <ul>
+                            <li>Generating 100k trending images per day. A self-hosted Stable Diffusion model takes ~2 seconds per image.</li>
+                            <li>100,000 * 2s = 200,000 seconds of compute (~55 hours).</li>
+                            <li><strong>Architect's Conclusion:</strong> We can clear the entire daily trending queue in a 5-hour off-peak window using a cluster of just 11 to 15 A10G GPUs, keeping our cloud compute costs highly predictable.</li>
+                        </ul>
+
+                        <div class="image-placeholder">
+                            <img src="hld.png" alt="High-Level Architecture Diagram" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <p class="caption">The decoupling of the Offline AI GPU Factory from the Online Edge-Cached Serving pipeline.</p>
+                        </div>
+
+                        <h3>Step 3: High-Level Design (HLD)</h3>
+                        <p>I’ve separated the heavy asynchronous AI generation from the ultra-fast synchronous serving.</p>
+
+                        <h4>Part A: The Offline Content Pipelines</h4>
+                        <p>We run two distinct pipelines on our GPU workers:</p>
+                        <ul>
+                            <li><strong>Trending Content Generation Pipeline:</strong> A service scrapes Twitter APIs, Google Trends, and News RSS feeds. It pushes topics to a High-Priority Kafka queue. An LLM generates trivia -> Stable Diffusion generates an image -> Image goes to S3 -> Metadata goes to DynamoDB with a TTL = 48 hours.</li>
+                            <li><strong>Evergreen Content Generation Pipeline:</strong> When GPUs are idle, they pull from a massive backlog of Wikipedia topics. They generate timeless assets -> Image goes to S3 -> Metadata goes to DynamoDB with TTL = Never.</li>
+                        </ul>
+
+                        <h4>Part B: The Edge-Cached Serving Pipeline</h4>
+                        <p>I do not wait for the user to pause.</p>
+                        <ol>
+                            <li><strong>The Background Sync:</strong> A daemon runs on the Smart TV. At 3:00 PM, it silently pings our API Gateway. Our Two-Tower ML RecSys predicts the user's likely evening watch habits. Instead of a flat list, it retrieves a structured, context-aware candidate matrix (e.g., 10 Sci-Fi assets, 10 Sports assets, 10 Evergreen assets). The TV downloads this batch of 30 payloads and stores them on its local hard drive. 30 items * 500KB = 15 Megabytes. This is a microscopic footprint that will easily fit.</li>
+                            <li><strong>Instant Render (8:00 PM):</strong> The user pauses a sci-fi movie on Netflix. The TV does not connect to the internet. Instead, a lightweight client-side router captures the active context (genre: sci-fi), plucks Asset #1 from the pre-fetched "Sci-Fi" bucket, and instantly renders it. This guarantees hyper-personalization matching the vibe of the show with 0ms network latency.</li>
+                            <li><strong>The Beacon:</strong> While the user views the image, the TV fires a 1KB background network call to our server. "User 123 viewed image A".</li>
+                        </ol>
+
+                        <div class="image-placeholder">
+                            <img src="matrix.png" alt="Two-Tower ML Context Matrix Diagram" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <p class="caption">The Two-Tower ML model predicting evening watch habits and pushing a context matrix to the client.</p>
+                        </div>
+
+                        <h3>Step 4: Component Deep Dive & Edge Cases</h3>
+                        <p>How do I handle power users, stale data, and system failures?</p>
+
+                        <h4>1. Heavy Pauser Problem</h4>
+                        <p>What if a user pauses 40 times in one night, exhausting their cache of 30 images?</p>
+                        <ul>
+                            <li><strong>The Fix:</strong> When the TV's unseen local queue drops to 5 items, the background daemon silently triggers a network call to fetch the next batch of 30. The cache refills itself before the user even sees a loading screen.</li>
+                        </ul>
+
+                        <h4>2. Content Freshness</h4>
+                        <p>If we prefetch a "Good Morning" image at 9:00 AM, but the user doesn't pause until 9:00 PM, the content is stale.</p>
+                        <ul>
+                            <li><strong>The Fix:</strong> The payload includes a <code>client_ttl</code> timestamp. If the TV hasn't shown the morning image by 1PM, the TV silently deletes it. For ultra-trending events (like a live match result), the API pushes a priority flag to bypass the queue and render at index 0.</li>
+                        </ul>
+
+                        <h4>3. Content Fallback (Total Network Outage)</h4>
+                        <p>If the user's internet goes down entirely:</p>
+                        <ul>
+                            <li><strong>The Fix:</strong> We permanently ship the TV firmware with 10 highly compressed, stunning 4K nature wallpapers. If the network is dead and the dynamic cache is empty, we seamlessly loop the baked-in assets.</li>
+                        </ul>
+
+                        <h4>4. Real Time Context Override</h4>
+                        <p>What if the user pauses something completely unpredictable, like a live breaking news broadcast, where pre-fetched content feels irrelevant?</p>
+                        <ul>
+                            <li><strong>The Fix:</strong> If the TV's local router detects a high-priority "live event" tag, it deliberately bypasses the local cache. It fires a synchronous 1KB API call to the backend: <code>{"context": "live_election"}</code>. The API Gateway bypasses the heavy ML model, hits a fast Redis index for "Trending Live Assets", and streams the image down. We accept a rare 500ms latency hit in this specific scenario to guarantee absolute contextual relevance.</li>
+                        </ul>
+
+                        <h4>5. Image Generation Optimization</h4>
+                        <p>What if Stable Diffusion generates a 1:1 square image, or we hit GPU memory limits trying to generate native 4K?</p>
+                        <ul>
+                            <li><strong>The Fix:</strong> We cannot generate native 4K directly—it causes Out-Of-Memory (OOM) errors and spikes generation time to 15 seconds per image. Instead, we use a <strong>Two-Stage Generation Pipeline</strong> inside our GPU workers:
+                                <ul>
+                                    <li>The LLM prompt is fed into Stable Diffusion XL configured for a 16:9 aspect ratio at 720p. We inject a custom LoRA (Low-Rank Adaptation) model trained on brand guidelines to ensure consistent, premium artistic styles (preventing weird or disturbing artifacts).</li>
+                                    <li>We pass that 720p image through a lightweight, deterministic AI upscaler (like Real-ESRGAN). This upscales the image to a crisp 4K resolution in milliseconds using a fraction of the VRAM, keeping our total pipeline at that required 2-second generation speed.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <div class="image-placeholder">
+                            <img src="image_gen_pipeline.png" alt="Two-Stage SDXL + ESRGAN Upscaling Diagram" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <p class="caption">Preventing OOM errors by generating at 720p with a custom LoRA, followed by a deterministic 4K upscaler.</p>
+                        </div>
+                        
+                        <div class="image-placeholder">
+                            <img src="bloom_filter.png" alt="Redis Bloom Filter Deduplication Flow" style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color);">
+                            <p class="caption">Using a Redis Bloom Filter to deduplicate candidates and ensure users never see the same image twice.</p>
+                        </div>
+
+                        <h3>Step 5: Low-Level Design (LLD)</h3>
+                        <p>Below is the core Python logic for the RecSys blending the buckets and using Redis Bloom Filters to guarantee the user never receives duplicate recommendations in their prefetch payload.</p>
+
+<pre><code class="language-python">import logging
+
+class ContentDatabase:
+    def get_trending_candidates(self, cohort_id: str, limit: int) -> list:
+        # DB automatically excludes items where TTL < current_time
+        # Two-Tower ML model scores and retrieves the top context-matrix candidates
+        pass
+        
+    def get_evergreen_candidates(self, cohort_id: str, limit: int) -> list:
+        # Retrieves timeless assets
+        pass
+
+class ImpressionTracker:
+    def __init__(self, redis_client):
+        self.redis = redis_client
+        
+    def filter_unseen(self, user_id: str, assets: list) -> list:
+        try:
+            # Check Redis Bloom filter. Returns boolean flags.
+            exists_flags = self.redis.bf_mexists(f"user_seen:{user_id}", assets) 
+            # Zip the assets with the boolean flags, keep only the ones that are False (unseen) 
+            return [asset for asset, seen in zip(assets, exists_flags) if not seen]
+        except Exception as e:
+            # Fallback: return everything so TV doesn't break
+            logging.error(f"Redis down. Graceful degradation: {e}")
+            return assets 
+
+class TVFeedOrchestrator:
+    def __init__(self, db: ContentDatabase, tracker: ImpressionTracker):
+        self.db = db
+        self.tracker = tracker
+        self.PREFETCH_SIZE = 30 # TV downloads 30 items for local caching
+
+    def get_mixed_prefetch_batch(self, user_id: str, cohort_id: str) -> dict:
+        # 1. Fetch Candidates (70% Trending, 30% Evergreen)
+        trending = self.db.get_trending_candidates(cohort_id, limit=35)
+        evergreen = self.db.get_evergreen_candidates(cohort_id, limit=15)
+        
+        all_candidates = trending + evergreen # 50 total candidates
+        
+        # 2. Deduplicate using Bloom Filter
+        unseen_assets = self.tracker.filter_unseen(user_id, all_candidates)
+        
+        # 3. Edge Case: User has seen literally everything in their cohort
+        if len(unseen_assets) < self.PREFETCH_SIZE:
+            logging.warning(f"Content exhaustion for user {user_id}. Backfilling.")
+            emergency_backfill = self.db.get_evergreen_candidates(cohort_id="GLOBAL", limit=20)
+            unseen_assets.extend(self.tracker.filter_unseen(user_id, emergency_backfill))
+
+        final_batch = unseen_assets[:self.PREFETCH_SIZE]
+        
+        return {
+            "status": "success",
+            "prefetch_items": final_batch,
+            "low_watermark_trigger": 5 # Instruct TV to refill when 5 items remain
+        }
+</code></pre>
+                        
+                        <p>Notice the exception block in the <code>ImpressionTracker</code>: if our Redis cluster dies, we fail open. We risk showing a duplicate image rather than breaking the API Gateway entirely.</p>
+
+                        <h3>The Final Polish</h3>
+                        <p>By architecting the system this way, I've solved the core problems. The Trending vs. Evergreen split protects our GPU compute budget. The DynamoDB TTL prevents storage bloat. And most importantly, by shifting from real-time API calls to asynchronous background prefetching, we eliminated the 8:00 PM network spike and guaranteed a sub-second user experience.</p>
+
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="container">
+                    <p>&copy; 2026 Abhay Arora. All rights reserved.</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        function initPage() {
+            const mainContent = document.querySelector('.main-content');
+            
+            // Progress Bar Logic
+            mainContent.addEventListener('scroll', () => {
+                const scrollTop = mainContent.scrollTop;
+                const scrollHeight = mainContent.scrollHeight - mainContent.clientHeight;
+                const scrolled = (scrollTop / scrollHeight) * 100;
+                document.getElementById("scrollProgressBar").style.width = scrolled + "%";
+            });
+
+            // Theme Toggle Logic
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            const currentTheme = localStorage.getItem('theme');
+            
+            if (currentTheme) {
+                body.classList.add(currentTheme);
+            } else if (!window.matchMedia || window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                body.classList.remove('light-theme');
+            } else {
+                body.classList.add('light-theme');
+            }
+            
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-theme');
+                let theme = body.classList.contains('light-theme') ? 'light-theme' : 'dark-theme';
+                localStorage.setItem('theme', theme);
+            });
+
+            // Custom Cursor Logic
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
+            const interactiveElements = document.querySelectorAll('a, button, details, summary');
+            
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+            });
+            
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseover', () => cursorOutline.classList.add('grow'));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('grow'));
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap === 'undefined') { console.error("GSAP not loaded!"); return; }
+            initPage();
+        });
+    </script>
+</body>
+</html>
